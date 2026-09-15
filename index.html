@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Sound Box Prank</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #111827, #2563eb);
+    }
+
+    .box {
+        width: 360px;
+        background: white;
+        padding: 25px;
+        border-radius: 22px;
+        box-shadow: 0 15px 40px rgba(0,0,0,.3);
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 0;
+        color: #111827;
+    }
+
+    .warning {
+        font-size: 12px;
+        color: #777;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        font-size: 20px;
+        text-align: center;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 12px;
+        padding: 14px;
+        border: 0;
+        border-radius: 12px;
+        background: #2563eb;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1d4ed8;
+    }
+
+    .soundbox {
+        margin: 25px auto 10px;
+        width: 220px;
+        padding: 20px;
+        background: #111827;
+        border-radius: 18px;
+        color: white;
+    }
+
+    .speaker {
+        font-size: 45px;
+    }
+
+    .status {
+        min-height: 25px;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    .received {
+        color: #16a34a;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>🔊 Payment Sound Box</h1>
+
+    <div class="warning">
+        Fun Demo / Prank — No real payment is made.
+    </div>
+
+    <input
+        type="number"
+        id="amount"
+        placeholder="Enter Amount ₹"
+        min="1"
+    >
+
+    <button onclick="playPayment()">
+        💰 Simulate Payment
+    </button>
+
+    <div class="soundbox">
+        <div class="speaker">🔊</div>
+        <div>Sound Box</div>
+    </div>
+
+    <div id="status" class="status"></div>
+
+</div>
+
+<script>
+
+function numberToWords(num) {
+
+    const ones = [
+        "", "One", "Two", "Three", "Four",
+        "Five", "Six", "Seven", "Eight", "Nine",
+        "Ten", "Eleven", "Twelve", "Thirteen",
+        "Fourteen", "Fifteen", "Sixteen",
+        "Seventeen", "Eighteen", "Nineteen"
+    ];
+
+    const tens = [
+        "", "", "Twenty", "Thirty", "Forty",
+        "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+    ];
+
+    if (num < 20) return ones[num];
+
+    if (num < 100)
+        return tens[Math.floor(num / 10)] +
+            (num % 10 ? " " + ones[num % 10] : "");
+
+    if (num < 1000)
+        return ones[Math.floor(num / 100)] +
+            " Hundred" +
+            (num % 100 ? " " + numberToWords(num % 100) : "");
+
+    if (num < 100000)
+        return numberToWords(Math.floor(num / 1000)) +
+            " Thousand" +
+            (num % 1000 ? " " + numberToWords(num % 1000) : "");
+
+    if (num < 10000000)
+        return numberToWords(Math.floor(num / 100000)) +
+            " Lakh" +
+            (num % 100000 ? " " + numberToWords(num % 100000) : "");
+
+    return numberToWords(Math.floor(num / 10000000)) +
+        " Crore" +
+        (num % 10000000 ? " " + numberToWords(num % 10000000) : "");
+}
+
+
+function playPayment() {
+
+    const amountInput = document.getElementById("amount");
+    const status = document.getElementById("status");
+
+    const amount = Number(amountInput.value);
+
+    if (!amount || amount <= 0) {
+        status.innerHTML = "⚠️ Please enter an amount.";
+        status.className = "status";
+        return;
+    }
+
+    const words = numberToWords(amount);
+
+    status.innerHTML =
+        "✓ Demo payment received: ₹" + amount;
+
+    status.className = "status received";
+
+    // Browser text-to-speech
+    const speech = new SpeechSynthesisUtterance(
+        "Payment received. Rupees " +
+        words +
+        ". This is a demo payment."
+    );
+
+    speech.lang = "en-IN";
+    speech.rate = 0.85;
+    speech.pitch = 1;
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(speech);
+}
+
+</script>
+
+</body>
+</html>
