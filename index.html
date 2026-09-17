@@ -1,390 +1,265 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bitcoin — P2P & Rewards Demo</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script>
-tailwind.config={darkMode:'class',theme:{extend:{colors:{
-btc:'#00D26A',darkBg:'#050807',cardBg:'#0D1410',borderClr:'#193025'
-}}}};
-</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bitcoin — Watch • Earn • Grow</title>
 <style>
-body{background:#050807}
-.glow{box-shadow:0 0 35px rgba(0,210,106,.12)}
-.grid-bg{background-image:linear-gradient(rgba(0,210,106,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(0,210,106,.045) 1px,transparent 1px);background-size:35px 35px}
-.hero-orb{position:absolute;width:420px;height:420px;border-radius:999px;background:rgba(0,210,106,.08);filter:blur(70px);pointer-events:none}
-input:focus,textarea:focus{border-color:#00D26A!important;box-shadow:0 0 0 1px #00D26A}
-button:disabled{cursor:not-allowed}
-
-.dashboard-shell{display:grid;grid-template-columns:235px minmax(0,1fr);gap:18px;min-height:720px}
-.dash-sidebar{background:linear-gradient(180deg,#07100c,#050908);border:1px solid #193025;border-radius:18px;padding:14px;position:sticky;top:78px;height:calc(100vh - 100px);min-height:650px;overflow:auto}
-.sidebar-brand{display:flex;align-items:center;gap:10px;padding:8px 6px 16px;border-bottom:1px solid #193025}
-.sidebar-brand b{font-size:20px;letter-spacing:1px}.sidebar-brand small{display:block;color:#7f9388;font-size:9px}.brand-coin,.mini-avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#00d26a;color:#041009;font-size:21px}
-.side-nav{display:grid;gap:4px;padding:13px 0}.side-link{display:flex;align-items:center;gap:13px;width:100%;border:1px solid transparent;background:transparent;color:#d6e1dc;text-align:left;padding:12px 11px;border-radius:10px;font-size:14px;cursor:pointer}.side-link i{width:20px;text-align:center;color:#c6d3cd}.side-link:hover,.side-link.active{background:rgba(0,210,106,.11);border-color:rgba(0,210,106,.28);color:#fff}.side-link.active i,.side-link:hover i{color:#00d26a}.side-link small{display:block;color:#7e9288;font-size:9px}.video-link{margin-top:5px;border-top:1px solid #193025;border-radius:0;padding-top:17px}.video-link i{color:#ffd34d}
-.sidebar-activity{border-top:1px solid #193025;padding-top:14px}.side-title{font-size:11px;font-weight:800;color:#e8f1ed;margin-bottom:9px}.side-activity-row{display:flex;gap:8px;align-items:center;font-size:10px;color:#aebdb6;padding:6px 0}.side-activity-row i{color:#00d26a;width:15px}
-.side-demo-note{margin-top:15px;padding:11px;border:1px solid #193025;border-radius:12px;background:#08120e;font-size:10px;color:#8ea198}.side-demo-note i{color:#00d26a;margin-right:5px}.side-demo-note b{color:#e7f1ec}.side-demo-note p{margin:5px 0 0;line-height:1.4}
-.dash-main{min-width:0}.dash-topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:16px}.dash-topbar h2{font-size:28px;font-weight:900}.eyebrow{color:#00d26a;font-size:10px;font-weight:800;letter-spacing:2px;margin-bottom:3px}.dash-user{display:flex;align-items:center;gap:9px;background:#0d1410;border:1px solid #193025;padding:7px 11px;border-radius:12px}.dash-user b{display:block;font-size:12px}.dash-user small{display:block;color:#7e9288;font-size:9px}.mini-avatar{width:34px;height:34px;font-size:16px}
-.hero-banner{position:relative;overflow:hidden;border:1px solid #193025;border-radius:18px;padding:25px;background:radial-gradient(circle at 90% 50%,rgba(0,210,106,.13),transparent 40%),#0b130f}.hero-banner h1{font-size:34px;font-weight:900;margin:8px 0}.hero-banner h1 span{color:#00d26a}.hero-banner p{max-width:680px;color:#91a39b;font-size:13px}.hero-bitcoin{position:absolute;right:7%;top:50%;transform:translateY(-50%);font-size:105px;color:#00d26a;opacity:.13}.badge-green,.badge-yellow{display:inline-flex;gap:6px;align-items:center;padding:5px 9px;border-radius:20px;font-size:10px;font-weight:800}.badge-green{color:#00d26a;background:#00d26a14;border:1px solid #00d26a33}.badge-yellow{color:#ffd34d;background:#ffd34d12;border:1px solid #ffd34d33}
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}.stat-card{display:flex;align-items:center;gap:11px;padding:15px;border:1px solid #193025;background:#0d1410;border-radius:14px}.stat-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;background:#00d26a12;color:#00d26a}.stat-card small,.stat-card span{display:block;color:#7f9189;font-size:9px}.stat-card b{display:block;font-size:20px;margin:2px 0}.green-text{color:#00d26a}
-.section-card{border:1px solid #193025;background:#0b120f;border-radius:15px;padding:17px}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.section-head h3{font-size:17px;font-weight:800}.section-head p{font-size:10px;color:#7f9189;margin-top:2px}.small-action{border:1px solid #00d26a55;background:#00d26a0d;color:#00d26a;border-radius:8px;padding:7px 10px;font-size:10px;font-weight:800}
-.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.plan-card{position:relative;text-align:left;background:#07100c;border:1px solid #234033;border-radius:13px;padding:14px;cursor:pointer;transition:.2s}.plan-card:hover,.plan-card.selected{border-color:#00d26a;box-shadow:0 0 18px rgba(0,210,106,.08)}.plan-card .coin{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:#00d26a;color:#031008;margin-bottom:8px}.plan-card .amount{font-size:24px;font-weight:900}.plan-card .line{font-size:10px;color:#9aaba4;padding:5px 0;border-bottom:1px solid #193025}.plan-card .line b{color:#e7efeb;display:block;font-size:11px}.activate-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px;font-size:10px;color:#87978f}.activate-btn,.wide-btn{border:0;background:#00d26a;color:#031008;font-weight:900;border-radius:10px;padding:10px 20px;cursor:pointer}.activate-btn:hover,.wide-btn:hover{filter:brightness(1.08)}.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}.info-card{display:flex;gap:10px;align-items:center;border:1px solid #193025;border-radius:13px;background:#0b120f;padding:12px}.info-card i{color:#00d26a;font-size:21px}.info-card b{font-size:11px}.info-card p{font-size:9px;color:#7f9188;margin-top:2px}.bottom-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}.history-list{display:grid;gap:7px}.history-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #193025;font-size:10px}.history-row small{display:block;color:#70837a;font-size:8px;margin-top:2px}.history-row .amount{color:#00d26a;font-weight:800}.empty-state{padding:24px;text-align:center;color:#7e9188;font-size:11px}.quick-card .wide-btn{width:100%;margin-top:8px}.balance-big{font-size:32px;font-weight:900;color:#00d26a;text-align:center;padding:20px}
-.wallet-panel{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin-bottom:10px}.wallet-balance{border:1px solid #193025;border-radius:15px;padding:25px;background:#0b120f}.wallet-balance span,.wallet-balance small{display:block;color:#7f9188;font-size:10px}.wallet-balance b{display:block;font-size:38px;color:#00d26a;margin:5px 0}.wallet-actions{display:grid;gap:10px}.wallet-actions button{border:1px solid #193025;background:#0d1410;color:#dce7e2;border-radius:12px;font-weight:800}.wallet-actions i{color:#00d26a;margin-right:7px}
-.team-list{display:grid;gap:8px;margin-top:10px}.team-row{display:flex;justify-content:space-between;align-items:center;border:1px solid #193025;background:#07100c;border-radius:10px;padding:11px}.team-row b{font-size:11px}.team-row span{font-size:9px;color:#00d26a}.team-count{font-size:22px;font-weight:900;color:#00d26a}.referral-panel{text-align:center;padding:35px}.ref-icon,.support-icon{font-size:38px;color:#00d26a;margin-bottom:8px}.referral-panel h3,.support-panel h3,.task-panel h3{font-size:22px;font-weight:900}.referral-panel p,.support-panel p,.task-panel p{color:#7f9188;font-size:11px;margin:5px 0 15px}.copy-row{display:flex;max-width:650px;margin:auto}.copy-row input{flex:1;min-width:0;background:#050908;border:1px solid #193025;color:#aabbb3;padding:10px;border-radius:9px 0 0 9px;font-size:10px}.copy-row button{background:#00d26a;color:#031008;border:0;padding:0 15px;border-radius:0 9px 9px 0;font-weight:900}.support-panel{text-align:center;padding:60px 20px}.task-panel{text-align:center;padding:45px 20px}.task-box{max-width:500px;margin:20px auto 0;border:1px solid #193025;border-radius:14px;background:#050908;padding:22px}.task-box #task-status{font-weight:800;color:#ffd34d}.task-timer{font-size:36px;color:#00d26a;font-family:monospace;font-weight:900;margin:12px}.blue-btn{background:#2188ff;color:#fff}.hidden{display:none!important}
-@media(max-width:1050px){.plans-grid{grid-template-columns:repeat(2,1fr)}.stat-grid,.info-grid{grid-template-columns:repeat(2,1fr)}.bottom-grid{grid-template-columns:1fr}.hero-bitcoin{right:2%;font-size:80px}}
-@media(max-width:760px){.dashboard-shell{grid-template-columns:1fr}.dash-sidebar{position:relative;top:0;height:auto;min-height:0}.side-nav{grid-template-columns:repeat(2,1fr)}.sidebar-activity,.side-demo-note{display:none}.dash-topbar{align-items:flex-start}.dash-topbar h2{font-size:22px}.dash-user{display:none}.hero-bitcoin{display:none}.stat-grid,.info-grid,.plans-grid,.wallet-panel{grid-template-columns:1fr 1fr}.activate-row{flex-direction:column}.bottom-grid{grid-template-columns:1fr}}
-@media(max-width:480px){.stat-grid,.info-grid,.plans-grid,.wallet-panel{grid-template-columns:1fr}.side-nav{grid-template-columns:1fr 1fr}.hero-banner{padding:18px}.hero-banner h1{font-size:28px}}
-
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#050505;color:#fff}
+:root{--gold:#ffbf19;--gold2:#ffdf67;--dark:#050505;--panel:#0b0b0b;--line:#493600;--muted:#a9a9a9;--green:#20d86b}
+body{background:radial-gradient(circle at 50% -10%,#3a2600 0,#090805 34%,#050505 70%);overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.top{position:sticky;top:0;z-index:50;height:76px;border-bottom:1px solid #5b4200;background:rgba(5,5,5,.96);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 22px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;min-width:215px}.coin{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffe46b,#f09a00);border:2px solid #fff1a3;color:#201400;font-size:29px;font-weight:900;box-shadow:0 0 25px #ffb30066}.logo b{font-size:29px;font-style:italic;letter-spacing:-1px;background:linear-gradient(#fff1a0,#f3a800);color:transparent;background-clip:text}.logo small{display:block;color:#bbb;font-size:10px;letter-spacing:2px}
+.top-notice{flex:1;display:flex;justify-content:center;gap:10px}.notice{border:1px solid #6b4c00;background:#0b0b09;border-radius:11px;padding:10px 16px;color:#ddd;font-size:12px}.notice strong{color:var(--gold2)}
+.nav-user{display:flex;align-items:center;gap:9px}.btn{border:1px solid #8b6200;background:#0b0b09;color:#fff;border-radius:9px;padding:10px 17px;font-weight:800}.btn.gold{background:linear-gradient(#ffd84a,#e89a00);border-color:#ffdf67;color:#130d00;box-shadow:0 0 15px #ffb30030}.btn.green{background:#12bf5b;border-color:#2ce879;color:#001b09}.btn.red{background:#3a1010;border-color:#7a2525;color:#ff9c9c}
+.wrap{max-width:1500px;margin:auto;padding:20px}.landing{min-height:calc(100vh - 76px);display:grid;place-items:center}.landing-box{width:min(1050px,100%);text-align:center;border:1px solid #5c4300;border-radius:25px;padding:70px 30px;background:radial-gradient(circle at 50% 0,#3a260055,transparent 55%),#090908;box-shadow:0 0 60px #ffb30010}.landing-box .bigcoin{font-size:90px;filter:drop-shadow(0 0 20px #ffb30066)}h1{font-size:clamp(40px,6vw,75px);margin:12px 0;font-weight:900}.goldtxt{color:var(--gold2)}.landing-box p{color:#aaa;max-width:680px;margin:0 auto 28px;line-height:1.7}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.auth{max-width:470px;margin:60px auto}.card{border:1px solid #503a00;background:linear-gradient(145deg,#0d0d0b,#080808);border-radius:18px;padding:25px;box-shadow:0 0 35px #ffb3000d}.card h2{margin-top:0;color:var(--gold2)}.field{width:100%;padding:13px;margin:6px 0 10px;background:#050505;border:1px solid #493600;border-radius:9px;color:#fff;outline:none}.field:focus{border-color:var(--gold);box-shadow:0 0 0 2px #ffbf1920}.wide{width:100%;margin-top:8px}
+.dashboard{display:grid;grid-template-columns:245px 1fr;gap:16px}.sidebar{border:1px solid #493600;border-radius:17px;background:#070706;padding:14px;min-height:calc(100vh - 116px);position:sticky;top:92px}.side-brand{display:flex;align-items:center;gap:9px;padding:8px 7px 16px;border-bottom:1px solid #2e2307;margin-bottom:10px}.side-brand .coin{width:38px;height:38px;font-size:21px}.side-brand b{font-size:19px;color:var(--gold2)}.side-brand small{display:block;font-size:8px;color:#888}.side-nav{display:grid;gap:5px}.side{width:100%;display:flex;align-items:center;gap:12px;background:transparent;color:#ddd;border:1px solid transparent;border-radius:10px;padding:12px;text-align:left}.side:hover,.side.active{background:linear-gradient(90deg,#3d2b00,#171207);border-color:#8c6300;color:#fff}.side i{font-style:normal;width:20px;text-align:center;font-size:18px}.side.active i{filter:drop-shadow(0 0 5px #ffbf19)}.side-task{margin-top:7px;border-top:1px solid #493600;padding-top:15px}.recent{margin-top:15px;padding-top:14px;border-top:1px solid #2e2307}.recent h4{font-size:11px;color:#ddd;margin:0 0 8px}.recent div{font-size:10px;color:#999;padding:6px 0}.side-note{margin-top:15px;padding:12px;border:1px solid #493600;border-radius:11px;color:#999;font-size:10px;line-height:1.5}.side-note b{color:var(--gold2)}
+.main{min-width:0}.dashhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.dashhead h2{margin:0;font-size:27px}.eyebrow{color:var(--gold);font-size:10px;font-weight:900;letter-spacing:2px;margin-bottom:5px}.userpill{display:flex;gap:9px;align-items:center;border:1px solid #493600;background:#090908;border-radius:12px;padding:7px 11px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#ffe36a,#ed9c00);color:#211400;font-size:20px}.userpill small{display:block;color:#888;font-size:9px}.banner{position:relative;overflow:hidden;border:1px solid #755400;border-radius:18px;padding:26px;background:radial-gradient(circle at 85% 50%,#ffb3001c,transparent 36%),#0a0a08}.banner h1{font-size:42px;margin:8px 0}.banner p{color:#aaa;max-width:700px}.banner .bigcoin{position:absolute;right:7%;top:50%;transform:translateY(-50%);font-size:115px;opacity:.16}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:11px 0}.stat{border:1px solid #493600;background:#0b0b09;border-radius:13px;padding:14px}.stat .ico{font-size:23px}.stat small{display:block;color:#8e8e8e;font-size:9px;margin-top:7px}.stat b{display:block;font-size:20px;color:#fff;margin:2px 0}.stat span{font-size:9px;color:#777}
+.section{border:1px solid #493600;background:#0a0a08;border-radius:15px;padding:16px;margin-bottom:10px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.section h3{margin:0;font-size:17px}.section-head p{margin:3px 0 0;color:#777;font-size:10px}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.plan{background:#070706;border:1px solid #5a4200;border-radius:14px;padding:15px;text-align:left;color:#fff;transition:.2s}.plan:hover,.plan.selected{border-color:#ffd24a;box-shadow:0 0 22px #ffb30018;transform:translateY(-2px)}.plan .pc{font-size:26px;color:var(--gold2)}.plan .amt{font-size:26px;font-weight:900;margin:4px 0 8px}.pline{padding:6px 0;border-top:1px solid #292006;font-size:10px;color:#999}.pline b{display:block;color:#fff;font-size:11px;margin-top:2px}.activate{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px;font-size:10px;color:#888}
+.info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.info .card2{display:flex;gap:10px;align-items:center;border:1px solid #493600;background:#0a0a08;border-radius:13px;padding:12px}.card2 i{font-style:normal;font-size:23px;color:var(--gold2)}.card2 b{font-size:11px}.card2 p{font-size:9px;color:#777;margin:3px 0 0}
+.bottom{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}.list{display:grid;gap:6px}.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #282006;padding:8px 0;font-size:10px}.row small{display:block;color:#777;font-size:8px;margin-top:2px}.amount{color:var(--gold2);font-weight:900}.empty{text-align:center;color:#777;padding:25px;font-size:11px}
+.page{display:none}.page.active{display:block}.subpage{display:none}.subpage.active{display:block}.walletbox{display:grid;grid-template-columns:2fr 1fr;gap:10px}.bigbalance{padding:30px;border:1px solid #654900;border-radius:15px;background:#0b0b09}.bigbalance span{font-size:10px;color:#888}.bigbalance b{display:block;font-size:42px;color:var(--gold2);margin:7px 0}.teams{display:grid;gap:8px}.teamrow{display:flex;justify-content:space-between;padding:12px;border:1px solid #352805;border-radius:10px;background:#070706}.teamrow small{display:block;color:#777}.teamrow span{color:var(--gold2);font-size:10px}.refbox{text-align:center;padding:35px}.copy{display:flex;max-width:700px;margin:15px auto}.copy input{flex:1;border-radius:8px 0 0 8px}.copy button{border:0;background:linear-gradient(#ffd84a,#e89a00);font-weight:900;border-radius:0 8px 8px 0;padding:0 16px}.task{text-align:center;padding:50px 20px}.timer{font-size:40px;color:var(--gold2);font-family:monospace;font-weight:900;margin:15px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.adminstat{padding:20px;border:1px solid #493600;border-radius:13px;background:#0a0a08}.adminstat b{font-size:25px;color:var(--gold2);display:block}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:10px}.table th,.table td{padding:10px;border-bottom:1px solid #2e2307;text-align:left;white-space:nowrap}
+.footer{border-top:1px solid #493600;margin-top:30px;padding:22px;text-align:center;color:#777;font-size:10px}
+@media(max-width:1050px){.top-notice{display:none}.plans{grid-template-columns:repeat(2,1fr)}.stats,.info{grid-template-columns:repeat(2,1fr)}.bottom{grid-template-columns:1fr}.admin-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.top{height:66px;padding:0 10px}.logo{min-width:0}.logo b{font-size:22px}.logo small{display:none}.top .coin{width:40px;height:40px;font-size:23px}.nav-user .btn{padding:8px}.dashboard{grid-template-columns:1fr}.sidebar{position:relative;top:0;min-height:0}.side-nav{grid-template-columns:repeat(2,1fr)}.recent,.side-note{display:none}.dashhead{align-items:flex-start}.userpill{display:none}.banner h1{font-size:31px}.banner .bigcoin{display:none}.walletbox{grid-template-columns:1fr}}
+@media(max-width:480px){.wrap{padding:10px}.stats,.info,.plans,.admin-grid{grid-template-columns:1fr}.side-nav{grid-template-columns:1fr 1fr}.landing-box{padding:45px 18px}.landing-box .bigcoin{font-size:65px}h1{font-size:39px}.copy{flex-direction:column;gap:7px}.copy input{border-radius:8px}.copy button{border-radius:8px;padding:11px}}
 </style>
 </head>
-<body class="bg-darkBg text-gray-100 font-sans min-h-screen">
-<header class="sticky top-0 z-50 bg-cardBg/95 backdrop-blur border-b border-borderClr">
-<div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-<button onclick="router('home')" class="flex items-center gap-3">
-<span class="w-10 h-10 rounded-full bg-btc text-darkBg flex items-center justify-center shadow-lg shadow-btc/20"><i class="fa-brands fa-bitcoin text-2xl"></i></span>
-<span class="text-left"><b class="text-xl tracking-wider"><span class="text-btc">BIT</span>COIN</b><small class="block text-[9px] text-gray-400 tracking-widest">P2P REWARDS DEMO</small></span>
-</button>
-<div id="nav-auth" class="flex gap-2">
-<button onclick="router('login')" class="px-4 py-2 text-sm font-semibold text-btc border border-btc rounded-lg">Login</button>
-<button onclick="router('register')" class="px-4 py-2 text-sm font-semibold bg-btc text-darkBg rounded-lg">Register</button>
-</div>
-<div id="nav-user" class="hidden items-center gap-3">
-<span id="nav-name" class="text-sm text-gray-300"></span>
-<button onclick="logout()" class="px-3 py-1.5 text-xs bg-red-500/10 text-red-400 border border-red-500/30 rounded-lg">Logout</button>
-</div>
-</div>
+<body>
+<header class="top">
+  <div class="logo"><div class="coin">₿</div><div><b>Bitcoin</b><small>WATCH • EARN • GROW</small></div></div>
+  <div class="top-notice"><div class="notice">📢 <strong>Join Our Telegram Channel</strong></div><div class="notice">💬 Chat ID: <strong>69119930084</strong></div><div class="notice">🤖 <strong>Support Bot</strong></div></div>
+  <div class="nav-user" id="nav-auth"><button class="btn" onclick="go('login')">Login</button><button class="btn gold" onclick="go('register')">Register</button></div>
+  <div class="nav-user hidden" id="nav-user"><span id="nav-name"></span><button class="btn red" onclick="logout()">Logout</button></div>
 </header>
 
-<main class="max-w-7xl mx-auto px-4 py-8">
-
-<section id="page-home" class="view-page">
-<div class="relative overflow-hidden grid-bg rounded-3xl border border-borderClr px-6 py-16 md:py-24 text-center">
-<div class="hero-orb -top-32 left-1/2 -translate-x-1/2"></div>
-<div class="relative">
-<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-btc/10 border border-btc/20 text-btc text-xs font-bold"><i class="fa-solid fa-circle-check"></i> Secure Demo Ecosystem</span>
-<h1 class="mt-6 text-4xl md:text-6xl font-black tracking-tight">Build Your <span class="text-btc">Bitcoin</span> Journey</h1>
-<p class="mt-5 max-w-2xl mx-auto text-gray-400">A polished front-end simulation for memberships, daily tasks, referrals and account management. No real-money transactions are processed.</p>
-<div class="flex flex-wrap justify-center gap-3 mt-8">
-<button onclick="router('register')" class="px-7 py-3 bg-btc text-darkBg font-bold rounded-xl shadow-lg shadow-btc/20 hover:scale-105 transition">Get Started</button>
-<button onclick="router('login')" class="px-7 py-3 bg-cardBg border border-borderClr font-bold rounded-xl">Open Dashboard</button>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mt-12 text-left">
-<div class="bg-cardBg/80 border border-borderClr rounded-2xl p-5"><i class="fa-solid fa-chart-line text-btc"></i><h3 class="font-bold mt-3">Live Overview</h3><p class="text-xs text-gray-400 mt-1">Balance, plan and activity at a glance.</p></div>
-<div class="bg-cardBg/80 border border-borderClr rounded-2xl p-5"><i class="fa-solid fa-users text-btc"></i><h3 class="font-bold mt-3">Referral Center</h3><p class="text-xs text-gray-400 mt-1">Share your demo referral link and view members.</p></div>
-<div class="bg-cardBg/80 border border-borderClr rounded-2xl p-5"><i class="fa-solid fa-shield-halved text-btc"></i><h3 class="font-bold mt-3">Local Demo</h3><p class="text-xs text-gray-400 mt-1">Data stays in this browser using localStorage.</p></div>
-</div>
-</div>
-<div class="mt-6 text-center text-[11px] text-yellow-400 bg-yellow-500/5 border border-yellow-500/20 rounded-xl p-3">DEMO / SIMULATION — balances and rewards shown here are virtual. No real deposits, withdrawals, UPI payments or cryptocurrency transfers are performed.</div>
+<main class="wrap">
+<section id="home" class="page active">
+  <div class="landing"><div class="landing-box">
+    <div class="bigcoin">₿</div>
+    <div class="eyebrow">BITCOIN MEMBER ECOSYSTEM</div>
+    <h1>Watch • Earn • <span class="goldtxt">Grow</span></h1>
+    <p>Modern Bitcoin-themed member dashboard with plans, wallet, team, history, referral and daily demo tasks.</p>
+    <div class="actions"><button class="btn gold" onclick="go('register')">Get Started</button><button class="btn" onclick="go('login')">Open Dashboard</button></div>
+  </div></div>
 </section>
 
-<section id="page-login" class="view-page hidden max-w-md mx-auto">
-<div class="bg-cardBg border border-borderClr rounded-2xl p-7 glow">
-<h2 class="text-2xl font-bold text-btc">Welcome Back</h2><p class="text-xs text-gray-400 mt-1 mb-6">Sign in to your demo dashboard.</p>
-<form onsubmit="handleLogin(event)" class="space-y-4">
-<input id="login-id" required class="w-full bg-darkBg border border-borderClr rounded-lg px-4 py-3 text-sm" placeholder="User ID or Gmail">
-<input id="login-pass" required type="password" class="w-full bg-darkBg border border-borderClr rounded-lg px-4 py-3 text-sm" placeholder="Password">
-<button class="w-full py-3 bg-btc text-darkBg font-bold rounded-lg">Login</button>
-</form>
-<p class="text-xs text-center text-gray-400 mt-5">New here? <button onclick="router('register')" class="text-btc font-bold">Create account</button></p>
+<section id="login" class="page"><div class="auth card">
+<h2>Bitcoin Login</h2><p style="color:#888;font-size:12px">Sign in to your member dashboard.</p>
+<form onsubmit="login(event)"><input id="li" class="field" required placeholder="User ID or Email"><input id="lp" class="field" type="password" required placeholder="Password"><button class="btn gold wide">Login</button></form>
+<p style="font-size:11px;color:#777;text-align:center">New member? <button class="btn" onclick="go('register')">Create Account</button></p>
+</div></section>
+
+<section id="register" class="page"><div class="auth card">
+<h2>Create Bitcoin Account</h2><p style="color:#888;font-size:12px">Create a local demo member account.</p>
+<form onsubmit="register(event)"><input id="rn" class="field" required placeholder="Full Name"><input id="re" class="field" required type="email" placeholder="Email"><input id="rp" class="field" required type="password" placeholder="Password"><input id="rr" class="field" placeholder="Referral ID (optional)"><button class="btn gold wide">Register</button></form>
+</div></section>
+
+<section id="dashboard" class="page">
+<div class="dashboard">
+<aside class="sidebar">
+ <div class="side-brand"><div class="coin">₿</div><div><b>Bitcoin</b><small>MEMBER PANEL</small></div></div>
+ <nav class="side-nav">
+  <button class="side active" data-tab="home" onclick="tab('home')"><i>⌂</i>Home</button>
+  <button class="side" data-tab="plans" onclick="tab('plans')"><i>▤</i>Plans</button>
+  <button class="side" data-tab="wallet" onclick="tab('wallet')"><i>▣</i>Wallet</button>
+  <button class="side" data-tab="team" onclick="tab('team')"><i>♟</i>My Team</button>
+  <button class="side" data-tab="history" onclick="tab('history')"><i>◷</i>History</button>
+  <button class="side" data-tab="referral" onclick="tab('referral')"><i>↗</i>Referral</button>
+  <button class="side" data-tab="support" onclick="tab('support')"><i>◉</i>Support</button>
+  <button class="side side-task" data-tab="task" onclick="tab('task')"><i>▶</i>Video Task <small>(1 Time/Day)</small></button>
+ </nav>
+ <div class="recent"><h4>Recent Activities</h4><div id="recent"></div></div>
+ <div class="side-note"><b>Bitcoin Demo</b><br>Virtual credits only. This website does not process real deposits, withdrawals or crypto transfers.</div>
+</aside>
+
+<div class="main">
+<div class="dashhead"><div><div class="eyebrow">USER DASHBOARD</div><h2>Welcome, <span id="dn" class="goldtxt">Member</span> 👋</h2></div><div class="userpill"><div class="avatar">₿</div><div><b id="duid">BTC0000</b><small>Active Member</small></div></div></div>
+
+<div id="sub-home" class="subpage active">
+ <div class="banner"><div class="eyebrow">BITCOIN MEMBER AREA</div><h1>Welcome to <span class="goldtxt">Bitcoin</span></h1><p>Manage your virtual balance, plans, team, referrals, history and daily demo tasks from one place.</p><div class="bigcoin">₿</div></div>
+ <div class="stats">
+  <div class="stat"><div class="ico">💰</div><small>Virtual Balance</small><b id="balance">₹0.00</b><span>Demo credits</span></div>
+  <div class="stat"><div class="ico">📦</div><small>Current Plan</small><b id="planname">None</b><span id="plandaily">No daily reward</span></div>
+  <div class="stat"><div class="ico">👥</div><small>My Team</small><b id="refcount">0</b><span>Direct referrals</span></div>
+  <div class="stat"><div class="ico">✓</div><small>Status</small><b class="goldtxt">Active</b><span id="dashuid">BTC0000</span></div>
+ </div>
+ <div class="section"><div class="section-head"><div><h3>Investment Packages</h3><p>Virtual demo packages</p></div><button class="btn" onclick="tab('plans')">View All</button></div><div id="plans-home" class="plans"></div><div class="activate"><button class="btn gold" onclick="activate()">⚡ Activate Selected</button><span id="selected-home">Select a plan.</span></div></div>
+ <div class="info"><div class="card2"><i>🛡</i><div><b>Safe & Secure</b><p>Local browser demo data.</p></div></div><div class="card2"><i>👥</i><div><b>Grow Your Network</b><p>Demo referral center.</p></div></div><div class="card2"><i>📈</i><div><b>Daily Earnings</b><p>Virtual task rewards.</p></div></div><div class="card2"><i>🤝</i><div><b>Referral Center</b><p>Share your demo ID.</p></div></div></div>
+ <div class="bottom"><div class="section"><div class="section-head"><h3>Recent Activities</h3></div><div id="history-home" class="list"></div></div><div class="section"><div class="section-head"><h3>Plan Overview</h3></div><div id="overview" class="empty"></div></div><div class="section"><div class="section-head"><h3>Your Balance</h3></div><div id="balance2" class="bigbalance" style="padding:18px;text-align:center"><b>₹0.00</b></div></div></div>
 </div>
+
+<div id="sub-plans" class="subpage"><div class="section"><div class="section-head"><div><h3>Bitcoin Plans</h3><p>Choose a virtual demo package.</p></div></div><div id="plans-full" class="plans"></div><div class="activate"><button class="btn gold" onclick="activate()">⚡ Activate Selected</button><span id="selected-full">Select a plan.</span></div></div></div>
+
+<div id="sub-wallet" class="subpage"><div class="walletbox">
+<div class="bigbalance"><span>Wallet Balance</span><b id="walletbal">₹0.00</b><small style="color:#777">Balance changes only after admin approval.</small></div>
+<div class="card" style="display:grid;gap:8px"><button class="btn" onclick="showAdd()">➕ Add Wallet Balance</button><button class="btn" onclick="showWithdraw()">↘ Withdraw (Min ₹110)</button></div>
+</div>
+<div id="addbox" class="section hidden"><h3>Add Wallet Balance</h3><p style="color:#777;font-size:11px">For a real-money deployment, connect a compliant payment gateway/backend. This HTML page only records a payment-proof request; it does not move money or auto-credit a balance.</p>
+<label style="font-size:10px;color:#aaa">Amount (minimum ₹110)</label><input id="depamt" class="field" type="number" min="110" placeholder="110">
+<label style="font-size:10px;color:#aaa">Payment method</label><select id="depmethod" class="field"><option>GPay</option><option>Paytm</option><option>PhonePe</option><option>UPI</option></select>
+<label style="font-size:10px;color:#aaa">UTR / Transaction reference</label><input id="deputr" class="field" placeholder="Enter UTR">
+<label style="font-size:10px;color:#aaa">Payment screenshot</label><input id="depshot" class="field" type="file" accept="image/*">
+<div style="font-size:11px;color:#bbb;line-height:1.6;margin:7px 0">Hindi: <b>Deposit me time lag sakta hai — admin approval ke baad balance update hoga.</b><br>English: <b>Deposits may take 10–30 minutes to appear after admin approval.</b></div>
+<button class="btn gold" onclick="submitDeposit()">Submit Payment Proof</button></div>
+<div id="withdrawbox" class="section hidden"><h3>Withdraw Request</h3><p style="color:#777;font-size:11px">Minimum withdrawal is ₹110. Only eligible, admin-approved balance can be requested.</p><input id="wamt" class="field" type="number" min="110" placeholder="Amount (min ₹110)"><input id="wupi" class="field" placeholder="Your UPI ID"><button class="btn gold" onclick="submitWithdraw()">Submit Withdrawal Request</button></div><div class="section"><h3>Wallet Activity</h3><div id="wallet-history" class="list"></div></div></div>
+
+<div id="sub-team" class="subpage"><div class="section"><div class="section-head"><div><h3>My Team</h3><p>Direct demo referrals</p></div><b id="teamnum" class="goldtxt">0</b></div><div id="teamlist" class="teams"></div></div></div>
+
+<div id="sub-history" class="subpage"><div class="section"><div class="section-head"><h3>Complete History</h3></div><div id="history-full" class="list"></div></div></div>
+
+<div id="sub-referral" class="subpage"><div class="section refbox"><div style="font-size:45px;color:#ffd24a">↗</div><h3>Referral Center</h3><p style="color:#777;font-size:11px">Share your demo referral link.</p><div class="copy"><input id="reflink" class="field" readonly><button onclick="copyRef()">Copy</button></div><div id="reflist" class="teams"></div></div></div>
+
+<div id="sub-support" class="subpage"><div class="section" style="text-align:center;padding:60px 20px"><div style="font-size:45px;color:#ffd24a">◉</div><h3>Support</h3><p style="color:#777;font-size:11px">Create a simulated support ticket stored in this browser.</p><button class="btn gold" onclick="support()">Create Demo Ticket</button></div></div>
+
+<div id="sub-task" class="subpage"><div class="section task"><div class="eyebrow">DAILY VIDEO TASK</div><h3>Complete Today's Demo Task</h3><p id="tasktext" style="color:#777;font-size:11px">Choose a plan first.</p><div id="taskstatus" class="goldtxt">Plan required</div><div id="timer" class="timer hidden">00:10</div><button id="taskbtn" class="btn gold" onclick="task()">Start Demo Task</button></div></div>
+</div></div>
 </section>
 
-<section id="page-register" class="view-page hidden max-w-md mx-auto">
-<div class="bg-cardBg border border-borderClr rounded-2xl p-7 glow">
-<h2 class="text-2xl font-bold text-btc">Create Account</h2><p class="text-xs text-gray-400 mt-1 mb-6">Create a local demo account.</p>
-<form onsubmit="handleRegister(event)" class="space-y-3">
-<input id="reg-name" required class="w-full bg-darkBg border border-borderClr rounded-lg px-4 py-3 text-sm" placeholder="Full Name">
-<input id="reg-email" required type="email" class="w-full bg-darkBg border border-borderClr rounded-lg px-4 py-3 text-sm" placeholder="Gmail / Email">
-<input id="reg-pass" required type="password" class="w-full bg-darkBg border border-borderClr rounded-lg px-4 py-3 text-sm" placeholder="Password">
-<input id="reg-ref" class="w-full bg-darkBg border border-borderClr rounded-lg px-4 py-3 text-sm" placeholder="Referral ID (optional)">
-<button class="w-full py-3 bg-btc text-darkBg font-bold rounded-lg">Register</button>
-</form>
-</div>
-</section>
-
-
-<section id="page-dashboard" class="view-page hidden">
-<div class="dashboard-shell">
-  <aside class="dash-sidebar">
-    <div class="sidebar-brand">
-      <div class="brand-coin"><i class="fa-brands fa-bitcoin"></i></div>
-      <div><b><span class="text-btc">BIT</span>COIN</b><small>Watch · Earn · Grow</small></div>
-    </div>
-
-    <nav class="side-nav">
-      <button class="side-link active" data-tab="home" onclick="showDashTab('home')"><i class="fa-solid fa-house"></i><span>Home</span></button>
-      <button class="side-link" data-tab="plans" onclick="showDashTab('plans')"><i class="fa-solid fa-layer-group"></i><span>Plans</span></button>
-      <button class="side-link" data-tab="wallet" onclick="showDashTab('wallet')"><i class="fa-solid fa-wallet"></i><span>Wallet</span></button>
-      <button class="side-link" data-tab="team" onclick="showDashTab('team')"><i class="fa-solid fa-users"></i><span>My Team</span></button>
-      <button class="side-link" data-tab="history" onclick="showDashTab('history')"><i class="fa-solid fa-clock-rotate-left"></i><span>History</span></button>
-      <button class="side-link" data-tab="referral" onclick="showDashTab('referral')"><i class="fa-solid fa-share-nodes"></i><span>Referral</span></button>
-      <button class="side-link" data-tab="support" onclick="showDashTab('support')"><i class="fa-solid fa-headset"></i><span>Support</span></button>
-      <button class="side-link video-link" data-tab="task" onclick="showDashTab('task')"><i class="fa-solid fa-circle-play"></i><span>Video Task<small>1 Time/Day</small></span></button>
-    </nav>
-
-    <div class="sidebar-activity">
-      <div class="side-title">Recent Activities</div>
-      <div id="side-activity"></div>
-    </div>
-
-    <div class="side-demo-note">
-      <i class="fa-solid fa-shield-halved"></i>
-      <b>Demo Dashboard</b>
-      <p>Virtual credits only. No real deposits or withdrawals.</p>
-    </div>
-  </aside>
-
-  <div class="dash-main">
-    <div class="dash-topbar">
-      <div>
-        <p class="eyebrow">MEMBER DASHBOARD</p>
-        <h2>Welcome, <span id="dash-name">Member</span> 👋</h2>
-      </div>
-      <div class="dash-user">
-        <div class="mini-avatar"><i class="fa-brands fa-bitcoin"></i></div>
-        <div><b id="dash-top-uid">BTC0000</b><small>Active member</small></div>
-      </div>
-    </div>
-
-    <div class="dash-tab" id="dash-home">
-      <div class="hero-banner">
-        <div>
-          <span class="badge-green"><i class="fa-solid fa-circle-check"></i> Secure Demo</span>
-          <h1>Welcome to <span>Bitcoin</span></h1>
-          <p>Manage your virtual rewards, plans, team and daily demo tasks from one dashboard.</p>
-        </div>
-        <div class="hero-bitcoin"><i class="fa-brands fa-bitcoin"></i></div>
-      </div>
-
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-wallet"></i></div><div><small>Virtual Balance</small><b id="dash-balance">₹0.00</b><span>Simulation credits</span></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-box"></i></div><div><small>Current Plan</small><b id="dash-plan">None</b><span id="dash-daily">No daily reward</span></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-users"></i></div><div><small>My Team</small><b id="dash-refcount">0</b><span>Direct referrals</span></div></div>
-        <div class="stat-card"><div class="stat-icon"><i class="fa-solid fa-chart-line"></i></div><div><small>Status</small><b class="green-text">Active</b><span id="dash-uid">BTC0000</span></div></div>
-      </div>
-
-      <div class="section-card">
-        <div class="section-head"><div><h3>Investment Packages</h3><p>Virtual demo packages — no real-money transactions.</p></div><button class="small-action" onclick="showDashTab('plans')">View All Plans</button></div>
-        <div id="plans" class="plans-grid"></div>
-        <div class="activate-row"><button id="activate" onclick="activatePlan()" class="activate-btn"><i class="fa-solid fa-bolt"></i> Activate Plan</button><span id="selected">Select a plan to activate.</span></div>
-      </div>
-
-      <div class="info-grid">
-        <div class="info-card"><i class="fa-solid fa-shield-halved"></i><div><b>Safe & Secure</b><p>Local browser demo data.</p></div></div>
-        <div class="info-card"><i class="fa-solid fa-users"></i><div><b>Grow Your Network</b><p>See your demo referrals.</p></div></div>
-        <div class="info-card"><i class="fa-solid fa-chart-column"></i><div><b>Daily Tasks</b><p>Complete one demo task.</p></div></div>
-        <div class="info-card"><i class="fa-solid fa-handshake"></i><div><b>Referral Center</b><p>Share your demo link.</p></div></div>
-      </div>
-
-      <div class="bottom-grid">
-        <div class="section-card"><div class="section-head"><h3>Recent Activities</h3></div><div id="history-home" class="history-list"></div></div>
-        <div class="section-card quick-card"><div class="section-head"><h3>Plan Overview</h3></div><div id="plan-overview" class="empty-state">Select a plan to get started.</div><button onclick="showDashTab('plans')" class="wide-btn">View Packages</button></div>
-        <div class="section-card quick-card"><div class="section-head"><h3>Your Balance</h3></div><div class="balance-big" id="balance-big">₹0.00</div><button onclick="showDashTab('wallet')" class="wide-btn">View Wallet</button></div>
-      </div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-plans">
-      <div class="section-card"><div class="section-head"><div><h3>All Plans</h3><p>These are virtual demo packages.</p></div></div><div id="plans-full" class="plans-grid"></div><div class="activate-row"><button onclick="activatePlan()" class="activate-btn"><i class="fa-solid fa-bolt"></i> Activate Selected</button><span id="selected-full">Select a plan.</span></div></div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-wallet">
-      <div class="wallet-panel">
-        <div class="wallet-balance"><span>Virtual Balance</span><b id="wallet-balance">₹0.00</b><small>Demo credits — not withdrawable.</small></div>
-        <div class="wallet-actions"><button onclick="showDashTab('plans')"><i class="fa-solid fa-box"></i> Plans</button><button onclick="showDashTab('history')"><i class="fa-solid fa-clock-rotate-left"></i> History</button></div>
-      </div>
-      <div class="section-card"><div class="section-head"><h3>Wallet Activity</h3></div><div id="wallet-history" class="history-list"></div></div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-team">
-      <div class="section-card"><div class="section-head"><div><h3>My Team</h3><p>Members who registered with your demo referral ID.</p></div><div class="team-count" id="team-count">0</div></div><div id="team-list" class="team-list"></div></div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-history">
-      <div class="section-card"><div class="section-head"><h3>Complete History</h3></div><div id="history-full" class="history-list"></div></div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-referral">
-      <div class="section-card referral-panel">
-        <div class="ref-icon"><i class="fa-solid fa-share-nodes"></i></div><h3>Referral Center</h3><p>Share this demo link with friends to test the referral flow.</p>
-        <div class="copy-row"><input id="ref-link" readonly><button onclick="copyRef()"><i class="fa-solid fa-copy"></i> Copy</button></div>
-        <div id="ref-list" class="team-list"></div>
-      </div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-support">
-      <div class="section-card support-panel"><i class="fa-solid fa-headset support-icon"></i><h3>Support</h3><p>Create a simulated support ticket. It is stored only in this browser.</p><button onclick="demoSupport()" class="wide-btn">Create Demo Ticket</button></div>
-    </div>
-
-    <div class="dash-tab hidden" id="dash-task">
-      <div class="section-card task-panel">
-        <span class="badge-yellow"><i class="fa-solid fa-circle-play"></i> Daily Video Task</span>
-        <h3>Complete Today's Demo Task</h3><p id="task-desc">Choose a plan to unlock the task.</p>
-        <div class="task-box"><div id="task-status">Task available</div><div id="timer" class="task-timer hidden">00:10</div><button id="task-btn" onclick="startTask()" class="wide-btn blue-btn">Start Demo Task</button></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<section id="page-admin" class="view-page hidden space-y-6">
-<div class="bg-cardBg border border-borderClr rounded-2xl p-6"><div class="flex flex-col md:flex-row md:justify-between gap-3"><div><p class="text-xs text-btc font-bold">DEMO ADMIN</p><h2 class="text-2xl font-black">Control Dashboard</h2><p class="text-xs text-gray-400 mt-1">Local browser data only.</p></div><button onclick="router('home')" class="px-4 py-2 bg-red-500/10 text-red-400 rounded-lg text-sm">Exit</button></div></div>
-<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-<div class="bg-cardBg border border-borderClr rounded-xl p-4"><span class="text-xs text-gray-400">Users</span><b id="a-users" class="block text-2xl mt-1">0</b></div>
-<div class="bg-cardBg border border-borderClr rounded-xl p-4"><span class="text-xs text-gray-400">Active Plans</span><b id="a-plans" class="block text-2xl mt-1 text-btc">0</b></div>
-<div class="bg-cardBg border border-borderClr rounded-xl p-4"><span class="text-xs text-gray-400">Virtual Credits</span><b id="a-balance" class="block text-2xl mt-1">₹0</b></div>
-<div class="bg-cardBg border border-borderClr rounded-xl p-4"><span class="text-xs text-gray-400">Tickets</span><b id="a-tickets" class="block text-2xl mt-1">0</b></div>
-</div>
-<div class="bg-cardBg border border-borderClr rounded-2xl p-6 overflow-x-auto"><h3 class="font-bold mb-4">Registered Demo Users</h3><table class="w-full text-left text-xs"><thead class="border-b border-borderClr text-gray-400"><tr><th class="p-3">UID</th><th class="p-3">Name</th><th class="p-3">Email</th><th class="p-3">Balance</th><th class="p-3">Plan</th><th class="p-3">Action</th></tr></thead><tbody id="admin-users"></tbody></table></div>
+<section id="admin" class="page">
+<div class="section"><div class="eyebrow">DEMO ADMIN</div><h2>Admin Dashboard</h2><p style="color:#777;font-size:11px">Local demo controls only.</p></div>
+<div class="admin-grid"><div class="adminstat">Users<b id="au">0</b></div><div class="adminstat">Active Plans<b id="ap">0</b></div><div class="adminstat">Virtual Balance<b id="ab">₹0</b></div><div class="adminstat">Open Tickets<b id="at">0</b></div></div>
+<div class="section"><div class="tablewrap"><table class="table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Balance</th><th>Plan</th><th>Action</th></tr></thead><tbody id="users"></tbody></table></div></div>
 </section>
 </main>
-
-<footer class="border-t border-borderClr bg-cardBg mt-10 py-5 text-center text-xs text-gray-500">
-© 2026 Bitcoin Demo Platform · Virtual simulation only
-</footer>
+<footer class="footer">© 2026 Bitcoin • Watch • Earn • Grow • Member Portal • <a href="#admin" onclick="go('admin');return false" style="color:#ffd24a">Admin</a></footer>
 
 <script>
 const PLANS={
-110:{amount:110,daily:12,total:180,days:15},
-220:{amount:220,daily:50,total:350,days:7},
-550:{amount:550,daily:50,total:750,days:15},
-1100:{amount:1100,daily:100,total:1500,days:15},
-2200:{amount:2200,daily:200,total:3000,days:15}
+  110:{amount:110,daily:12,total:180,days:15,points:110},
+  220:{amount:220,daily:50,total:350,days:7,points:220},
+  550:{amount:550,daily:50,total:750,days:15,points:550},
+  1100:{amount:1100,daily:100,total:1500,days:15,points:1100}
 };
-let db=JSON.parse(localStorage.getItem('bitcoin_demo_db')||'null')||{users:[],tickets:[],currentUser:null};
+let db=JSON.parse(localStorage.getItem('bitcoin_gold_demo')||'null');
+if(!db){
+  const old=JSON.parse(localStorage.getItem('bitcoin_db')||'null');
+  if(old && old.users){ db=old; }
+}
+if(!db) db={users:[],tickets:[],currentUser:null};
 let selected=110;
-function save(){localStorage.setItem('bitcoin_demo_db',JSON.stringify(db))}
+
+function save(){localStorage.setItem('bitcoin_gold_demo',JSON.stringify(db))}
 function uid(){return 'BTC'+Math.floor(1000+Math.random()*9000)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function addHistory(u,type,amount,details){u.history=u.history||[];u.history.push({type,amount:Number(amount||0),details,date:new Date().toISOString()})}
-function router(page){
-document.querySelectorAll('.view-page').forEach(x=>x.classList.add('hidden'));
-let el=document.getElementById('page-'+page);if(el)el.classList.remove('hidden');
-if(page==='dashboard'&&db.currentUser)loadDashboard();
-if(page==='admin')loadAdmin();
-window.scrollTo({top:0,behavior:'smooth'});
-updateNav();
+function go(id){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById(id); if(el)el.classList.add('active');
+  window.scrollTo(0,0); updateNav();
+  if(id==='dashboard')loadDashboard();
+  if(id==='admin')loadAdmin();
 }
 function updateNav(){
-let logged=!!db.currentUser;
-document.getElementById('nav-auth').classList.toggle('hidden',logged);
-document.getElementById('nav-user').classList.toggle('hidden',!logged);
-if(logged)document.getElementById('nav-name').textContent=db.currentUser.name+' · '+db.currentUser.uid;
+  const logged=!!db.currentUser;
+  document.getElementById('nav-auth').classList.toggle('hidden',logged);
+  document.getElementById('nav-user').classList.toggle('hidden',!logged);
+  if(logged)document.getElementById('nav-name').textContent=db.currentUser.name+' · '+db.currentUser.uid;
 }
-function handleRegister(e){
-e.preventDefault();
-let name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim().toLowerCase(),pass=document.getElementById('reg-pass').value,ref=document.getElementById('reg-ref').value.trim();
-if(db.users.some(u=>u.email===email)){alert('Email already registered.');return}
-if(ref&&!db.users.some(u=>u.uid===ref)){alert('Referral ID not found.');return}
-let u={uid:uid(),name,email,pass,balance:0,upline:ref,plan:null,lastTask:null,history:[]};
-addHistory(u,'Registration',0,'Demo account created');db.users.push(u);save();
-alert('Account created! Your Member ID is '+u.uid);router('login');
+function register(e){
+ e.preventDefault();
+ const name=document.getElementById('rn').value.trim(),email=document.getElementById('re').value.trim().toLowerCase(),pass=document.getElementById('rp').value,ref=document.getElementById('rr').value.trim().toUpperCase();
+ if(db.users.some(u=>u.email===email)){alert('Email already registered.');return}
+ if(ref&&!db.users.some(u=>u.uid===ref)){alert('Referral ID not found.');return}
+ const u={uid:uid(),name,email,pass,balance:0,upline:ref,plan:null,lastTask:null,history:[]};
+ addHistory(u,'Registration',0,'Demo account created');db.users.push(u);save();
+ alert('Account created. Your ID is '+u.uid);document.getElementById('li').value=email;document.getElementById('lp').value=pass;go('login');
 }
-function handleLogin(e){
-e.preventDefault();
-let id=document.getElementById('login-id').value.trim().toLowerCase(),pass=document.getElementById('login-pass').value;
-let u=db.users.find(x=>(x.email.toLowerCase()===id||x.uid.toLowerCase()===id)&&x.pass===pass);
-if(!u){alert('Invalid login details.');return}
-db.currentUser=u;addHistory(u,'Login',0,'Demo login');save();router('dashboard');
+function login(e){
+ e.preventDefault();const id=document.getElementById('li').value.trim().toLowerCase(),pass=document.getElementById('lp').value;
+ const u=db.users.find(x=>(x.email===id||x.uid.toLowerCase()===id)&&x.pass===pass);
+ if(!u){alert('Invalid login details.');return}
+ db.currentUser=u;addHistory(u,'Login',0,'Demo login');save();go('dashboard');
 }
-function logout(){db.currentUser=null;save();router('home')}
+function logout(){db.currentUser=null;save();go('home')}
+function cards(){
+ return Object.values(PLANS).map(p=>`<button class="plan ${selected===p.amount?'selected':''}" onclick="selectPlan(${p.amount})">
+ <div class="pc">₿</div><div class="amt">₹${p.amount}</div>
+ <div class="pline">Package Points<b>${p.points} Points</b></div>
+ <div class="pline">Earn Per Day<b>${p.daily} Points</b></div>
+ <div class="pline">Total Earnings<b>${p.total} Points</b></div>
+ <div class="pline">Validity<b>${p.days} Days</b></div></button>`).join('');
+}
+function selectPlan(a){selected=a;renderPlans();if(db.currentUser)loadDashboard()}
 function renderPlans(){
-let box=document.getElementById('plans');
-box.innerHTML=Object.values(PLANS).map(p=>`<button onclick="selectPlan(${p.amount})" class="text-left bg-darkBg border ${selected===p.amount?'border-btc':'border-borderClr'} rounded-xl p-4 hover:border-btc transition"><b class="text-btc text-lg">₹${p.amount}</b><span class="block text-xs text-gray-300 mt-1">₹${p.daily}/day</span><span class="block text-xs text-emerald-400">₹${p.total} total · ${p.days} days</span></button>`).join('');
-let p=PLANS[selected];document.getElementById('selected').textContent=`Selected: ₹${p.amount} · ₹${p.daily}/day · ${p.days} days`;
+ const h=document.getElementById('plans-home'),f=document.getElementById('plans-full');
+ if(h)h.innerHTML=cards();if(f)f.innerHTML=cards();
+ const p=PLANS[selected];
+ ['selected-home','selected-full'].forEach(id=>{const x=document.getElementById(id);if(x)x.textContent=`Selected: ₹${p.amount} · ${p.daily}/day · ${p.days} days`})
 }
-function selectPlan(a){selected=a;if(db.currentUser)loadDashboard();else renderPlans()}
-function activatePlan(){
-if(!db.currentUser){router('login');return}
-let u=db.users.find(x=>x.uid===db.currentUser.uid),p=PLANS[selected];
-if(u.plan){alert('A demo plan is already active.');return}
-u.balance+=p.amount;u.plan=p;addHistory(u,'Demo Plan Activated',p.amount,`Virtual ₹${p.amount} package activated`);db.currentUser=u;save();loadDashboard();
+function activate(){
+ if(!db.currentUser){go('login');return}
+ const u=db.users.find(x=>x.uid===db.currentUser.uid),p=PLANS[selected];
+ if(u.plan){alert('A demo plan is already active.');return}
+ u.balance+=p.amount;u.plan=p;db.currentUser=u;addHistory(u,'Demo Plan Activated',p.amount,'Virtual package activated');save();loadDashboard();alert('Demo plan activated. ₹'+p.amount+' virtual credits added.');
 }
-function startTask(){
-let u=db.users.find(x=>x.uid===db.currentUser.uid);
-if(!u.plan){alert('Activate a demo plan first.');return}
-let today=new Date().toISOString().slice(0,10);
-if(u.lastTask===today){alert('Today's demo task is already completed.');return}
-let btn=document.getElementById('task-btn'),timer=document.getElementById('timer'),status=document.getElementById('task-status');
-btn.disabled=true;timer.classList.remove('hidden');let n=10;timer.textContent='00:10';
-let iv=setInterval(()=>{n--;timer.textContent='00:'+String(n).padStart(2,'0');if(n<=0){clearInterval(iv);u.balance+=u.plan.daily;u.lastTask=today;addHistory(u,'Daily Demo Reward',u.plan.daily,'Virtual daily task completed');save();loadDashboard();alert('Demo reward added: ₹'+u.plan.daily)}},1000);
+function historyHTML(u,limit){
+ let h=(u.history||[]).slice().reverse();if(limit)h=h.slice(0,limit);
+ return h.length?h.map(x=>`<div class="row"><div><b>${esc(x.type)}</b><small>${esc(x.details)} · ${new Date(x.date).toLocaleString()}</small></div><span class="amount">${x.amount?'₹'+Number(x.amount).toFixed(2):'—'}</span></div>`).join(''):'<div class="empty">No activity yet.</div>';
 }
 function loadDashboard(){
-  let u=db.users.find(x=>x.uid===db.currentUser.uid); db.currentUser=u;
-  document.getElementById('dash-name').textContent=u.name;
-  document.getElementById('dash-top-uid').textContent=u.uid;
-  document.getElementById('dash-uid').textContent=u.uid;
-  document.getElementById('dash-balance').textContent='₹'+Number(u.balance).toFixed(2);
-  document.getElementById('balance-big').textContent='₹'+Number(u.balance).toFixed(2);
-  document.getElementById('wallet-balance').textContent='₹'+Number(u.balance).toFixed(2);
-  document.getElementById('dash-plan').textContent=u.plan?'₹'+u.plan.amount:'None';
-  document.getElementById('dash-daily').textContent=u.plan?'₹'+u.plan.daily+' virtual/day':'No daily reward';
-
-  let refs=db.users.filter(x=>x.upline===u.uid);
-  document.getElementById('dash-refcount').textContent=refs.length;
-  document.getElementById('team-count').textContent=refs.length;
-  document.getElementById('ref-link').value=location.href.split('#')[0]+'#ref='+u.uid;
-
-  const planCards=Object.values(PLANS).map(p=>`<button onclick="selectPlan(${p.amount})" class="plan-card ${selected===p.amount?'selected':''}">
-    <div class="coin"><i class="fa-brands fa-bitcoin"></i></div><div class="amount">₹${p.amount}</div>
-    <div class="line">Package Points <b>${p.amount===110?'110':p.amount===220?'220':p.amount===550?'550':'1100'} Points</b></div>
-    <div class="line">Earn Per Day <b>${p.daily} Points</b></div>
-    <div class="line">Total Earnings <b>${p.total} Points</b></div>
-    <div class="line">Validity <b>${p.days} Days</b></div>
-  </button>`).join('');
-  document.getElementById('plans').innerHTML=planCards;
-  document.getElementById('plans-full').innerHTML=planCards;
-  document.getElementById('selected').textContent=`Selected: ₹${PLANS[selected].amount} · ₹${PLANS[selected].daily}/day`;
-  document.getElementById('selected-full').textContent=`Selected: ₹${PLANS[selected].amount} · ₹${PLANS[selected].daily}/day`;
-
-  let planText=u.plan?`₹${u.plan.amount} package · ${u.plan.daily} virtual/day · ${u.plan.days} days`:'Select a plan to get started.';
-  document.getElementById('plan-overview').textContent=planText;
-
-  document.getElementById('history-home').innerHTML=historyHTML(u,5);
-  document.getElementById('history-full').innerHTML=historyHTML(u);
-  document.getElementById('wallet-history').innerHTML=historyHTML(u);
-
-  document.getElementById('team-list').innerHTML=refs.length?refs.map(x=>`<div class="team-row"><div><b>${esc(x.name)}</b><small style="display:block;color:#70837a;font-size:8px">${esc(x.email)}</small></div><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty-state">No direct referrals yet.</div>';
-  document.getElementById('ref-list').innerHTML=refs.length?refs.map(x=>`<div class="team-row"><b>${esc(x.name)}</b><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty-state">No referrals yet.</div>';
-
-  document.getElementById('side-activity').innerHTML=(u.history||[]).slice(-5).reverse().map(x=>`<div class="side-activity-row"><i class="fa-solid fa-circle-check"></i><span>${esc(x.type)}</span></div>`).join('')||'<div class="side-activity-row">No activity</div>';
-
-  let today=new Date().toISOString().slice(0,10),done=u.lastTask===today;
-  document.getElementById('task-desc').textContent=u.plan?`Complete the short demo task to receive ₹${u.plan.daily} virtual credits.`:'Choose a plan to unlock the task.';
-  document.getElementById('task-status').textContent=done?"Today's task completed":u.plan?'Task available':'Plan required';
-  document.getElementById('task-btn').disabled=done||!u.plan;
-  document.getElementById('task-btn').textContent=done?'Completed Today':'Start Demo Task';
-  updateNav();
+ const u=db.users.find(x=>x.uid===db.currentUser.uid);if(!u){logout();return}db.currentUser=u;
+ document.getElementById('dn').textContent=u.name;document.getElementById('duid').textContent=u.uid;document.getElementById('dashuid').textContent=u.uid;
+ document.getElementById('balance').textContent='₹'+Number(u.balance).toFixed(2);document.getElementById('balance2').innerHTML='<b>₹'+Number(u.balance).toFixed(2)+'</b>';document.getElementById('walletbal').textContent='₹'+Number(u.balance).toFixed(2);
+ document.getElementById('planname').textContent=u.plan?'₹'+u.plan.amount:'None';document.getElementById('plandaily').textContent=u.plan?'₹'+u.plan.daily+' virtual/day':'No daily reward';
+ const refs=db.users.filter(x=>x.upline===u.uid);document.getElementById('refcount').textContent=refs.length;document.getElementById('teamnum').textContent=refs.length;
+ document.getElementById('reflink').value=location.href.split('#')[0]+'?ref='+u.uid;
+ document.getElementById('plans-home').innerHTML=cards();document.getElementById('plans-full').innerHTML=cards();
+ document.getElementById('selected-home').textContent=`Selected: ₹${PLANS[selected].amount} · ${PLANS[selected].daily}/day · ${PLANS[selected].days} days`;
+ document.getElementById('selected-full').textContent=`Selected: ₹${PLANS[selected].amount} · ${PLANS[selected].daily}/day · ${PLANS[selected].days} days`;
+ document.getElementById('overview').textContent=u.plan?`₹${u.plan.amount} plan · ${u.plan.daily} virtual/day · ${u.plan.days} days`:'Select a plan to get started.';
+ document.getElementById('history-home').innerHTML=historyHTML(u,5);document.getElementById('history-full').innerHTML=historyHTML(u);document.getElementById('wallet-history').innerHTML=historyHTML(u);
+ document.getElementById('recent').innerHTML=(u.history||[]).slice(-5).reverse().map(x=>`<div>● ${esc(x.type)}</div>`).join('')||'<div>No activity</div>';
+ document.getElementById('teamlist').innerHTML=refs.length?refs.map(x=>`<div class="teamrow"><div><b>${esc(x.name)}</b><small>${esc(x.email)}</small></div><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty">No direct referrals yet.</div>';
+ document.getElementById('reflist').innerHTML=refs.length?refs.map(x=>`<div class="teamrow"><b>${esc(x.name)}</b><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty">No referrals yet.</div>';
+ const today=new Date().toISOString().slice(0,10),done=u.lastTask===today;
+ document.getElementById('tasktext').textContent=u.plan?'Complete the demo task to receive ₹'+u.plan.daily+' virtual credits.':'Choose a plan first.';
+ document.getElementById('taskstatus').textContent=done?"Today's task completed":u.plan?'Task available':'Plan required';
+ const b=document.getElementById('taskbtn');b.disabled=done||!u.plan;b.textContent=done?'Completed Today':'Start Demo Task';
 }
-function copyRef(){let x=document.getElementById('ref-link');x.select();navigator.clipboard?.writeText(x.value);alert('Referral link copied.')}
-function demoSupport(){if(!db.currentUser)return;db.tickets.push({id:'T'+Date.now(),uid:db.currentUser.uid,message:'Demo support ticket',status:'Open'});addHistory(db.currentUser,'Support Ticket',0,'Demo ticket created');save();alert('Demo support ticket created.')}
+function tab(t){
+ document.querySelectorAll('.subpage').forEach(x=>x.classList.remove('active'));document.getElementById('sub-'+t).classList.add('active');
+ document.querySelectorAll('.side').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));
+ loadDashboard();
+}
+function task(){
+ if(!db.currentUser||!db.currentUser.plan){alert('Activate a demo plan first.');return}
+ const u=db.users.find(x=>x.uid===db.currentUser.uid),today=new Date().toISOString().slice(0,10);
+ if(u.lastTask===today){alert('Already completed today.');return}
+ const btn=document.getElementById('taskbtn'),timer=document.getElementById('timer');btn.disabled=true;timer.classList.remove('hidden');
+ let n=10;timer.textContent='00:10';
+ const iv=setInterval(()=>{n--;timer.textContent='00:'+String(n).padStart(2,'0');if(n<=0){clearInterval(iv);u.balance+=u.plan.daily;u.lastTask=today;addHistory(u,'Daily Demo Reward',u.plan.daily,'Virtual daily task completed');db.currentUser=u;save();loadDashboard();alert('Demo reward added: ₹'+u.plan.daily)}},1000);
+}
+function copyRef(){const x=document.getElementById('reflink');navigator.clipboard?.writeText(x.value);alert('Referral link copied.')}
+function support(){if(!db.currentUser)return;db.tickets.push({id:'T'+Date.now(),uid:db.currentUser.uid,status:'Open'});addHistory(db.currentUser,'Support Ticket',0,'Demo ticket created');save();loadDashboard();alert('Demo support ticket created.')}
 function loadAdmin(){
-let users=db.users;document.getElementById('a-users').textContent=users.length;document.getElementById('a-plans').textContent=users.filter(x=>x.plan).length;document.getElementById('a-balance').textContent='₹'+users.reduce((s,x)=>s+Number(x.balance||0),0).toFixed(0);document.getElementById('a-tickets').textContent=db.tickets.filter(x=>x.status==='Open').length;
-document.getElementById('admin-users').innerHTML=users.length?users.map(u=>`<tr class="border-b border-borderClr"><td class="p-3 font-bold text-btc">${esc(u.uid)}</td><td class="p-3">${esc(u.name)}</td><td class="p-3">${esc(u.email)}</td><td class="p-3">₹${Number(u.balance).toFixed(2)}</td><td class="p-3">${u.plan?'₹'+u.plan.amount:'None'}</td><td class="p-3"><button onclick="addDemoCredit('${esc(u.uid)}')" class="px-2 py-1 bg-btc text-darkBg rounded">+100</button></td></tr>`).join(''):'<tr><td colspan="6" class="p-5 text-center text-gray-500">No users</td></tr>';
+ document.getElementById('au').textContent=db.users.length;document.getElementById('ap').textContent=db.users.filter(x=>x.plan).length;document.getElementById('ab').textContent='₹'+db.users.reduce((s,x)=>s+Number(x.balance||0),0).toFixed(0);document.getElementById('at').textContent=db.tickets.filter(x=>x.status==='Open').length;
+ document.getElementById('users').innerHTML=db.users.map(u=>`<tr><td>${esc(u.uid)}</td><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>₹${Number(u.balance).toFixed(2)}</td><td>${u.plan?'₹'+u.plan.amount:'None'}</td><td><button class="btn" onclick="credit('${u.uid}')">+100 demo</button></td></tr>`).join('')||'<tr><td colspan="6">No users</td></tr>';
 }
-function addDemoCredit(id){let u=db.users.find(x=>x.uid===id);if(!u)return;u.balance+=100;addHistory(u,'Admin Demo Credit',100,'Virtual credit added by demo admin');save();loadAdmin();if(db.currentUser?.uid===id)loadDashboard()}
+function credit(id){const u=db.users.find(x=>x.uid===id);if(!u)return;u.balance+=100;addHistory(u,'Admin Demo Credit',100,'Virtual credit');save();loadAdmin();if(db.currentUser?.uid===id)loadDashboard()}
 
-function showDashTab(tab){
-  document.querySelectorAll('.dash-tab').forEach(x=>x.classList.add('hidden'));
-  const target=document.getElementById('dash-'+tab);
-  if(target) target.classList.remove('hidden');
-  document.querySelectorAll('.side-link').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));
-  if(db.currentUser) loadDashboard();
+function showAdd(){document.getElementById('addbox').classList.remove('hidden');document.getElementById('withdrawbox').classList.add('hidden')}
+function showWithdraw(){document.getElementById('withdrawbox').classList.remove('hidden');document.getElementById('addbox').classList.add('hidden')}
+function submitDeposit(){
+ if(!db.currentUser)return;
+ const amt=Number(document.getElementById('depamt').value),utr=document.getElementById('deputr').value.trim(),method=document.getElementById('depmethod').value, f=document.getElementById('depshot').files[0];
+ if(amt<110){alert('Minimum deposit request is ₹110.');return}
+ if(!utr||!f){alert('Enter UTR and upload the payment screenshot.');return}
+ const reader=new FileReader();reader.onload=()=>{db.deposits=db.deposits||[];db.deposits.push({id:'D'+Date.now(),uid:db.currentUser.uid,amount:amt,method,utr,screenshot:reader.result,status:'Pending',date:new Date().toISOString()});addHistory(db.currentUser,'Deposit Proof Submitted',amt,'UTR: '+utr);save();loadDashboard();alert('Payment proof submitted. Admin approval is required before the balance changes.');};reader.readAsDataURL(f)
 }
-function historyHTML(u, limit=0){
-  let h=(u.history||[]).slice().reverse();
-  if(limit) h=h.slice(0,limit);
-  return h.length?h.map(x=>`<div class="history-row"><div><b>${esc(x.type)}</b><small>${esc(x.details)} · ${new Date(x.date).toLocaleString()}</small></div><span class="amount">${x.amount?'₹'+Number(x.amount).toFixed(2):'—'}</span></div>`).join(''):'<div class="empty-state">No activity yet.</div>';
+function submitWithdraw(){
+ if(!db.currentUser)return;const amt=Number(document.getElementById('wamt').value),upi=document.getElementById('wupi').value.trim(),u=db.users.find(x=>x.uid===db.currentUser.uid);
+ if(amt<110){alert('Minimum withdrawal is ₹110.');return} if(amt>Number(u.balance)){alert('Insufficient approved balance.');return} if(!upi){alert('Enter your UPI ID.');return}
+ db.withdrawals=db.withdrawals||[];db.withdrawals.push({id:'W'+Date.now(),uid:u.uid,amount:amt,upi,status:'Pending',date:new Date().toISOString()});addHistory(u,'Withdrawal Request',amt,'UPI: '+upi);save();loadDashboard();alert('Withdrawal request submitted for admin review.')
 }
-
 function init(){
-let ref=new URLSearchParams(location.hash.replace('#','?')).get('ref');if(ref)document.getElementById('reg-ref').value=ref;
-if(!db.users.length){
-let admin={uid:'BTCADMIN',name:'Demo Admin',email:'admin@example.test',pass:'demo1234',balance:5000,upline:'',plan:PLANS[110],lastTask:null,history:[]};
-addHistory(admin,'Account',0,'Demo administrator created');db.users.push(admin);save();
-}
-router('home');
+ if(!db.users.length){const a={uid:'BTCADMIN',name:'Demo Admin',email:'admin@bitcoin.demo',pass:'demo1234',balance:0,upline:'',plan:null,lastTask:null,history:[]};addHistory(a,'Account',0,'Demo administrator created');db.users.push(a);save()}
+ const params=new URLSearchParams(location.search),ref=params.get('ref');if(ref)document.getElementById('rr').value=ref;
+ renderPlans();updateNav();
 }
 init();
 </script>
