@@ -8,7 +8,7 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#050505;color:#fff}
 :root{--gold:#ffbf19;--gold2:#ffdf67;--dark:#050505;--panel:#0b0b0b;--line:#493600;--muted:#a9a9a9;--green:#20d86b}
 body{background:radial-gradient(circle at 50% -10%,#3a2600 0,#090805 34%,#050505 70%);overflow-x:hidden}
-button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 .top{position:sticky;top:0;z-index:50;height:76px;border-bottom:1px solid #5b4200;background:rgba(5,5,5,.96);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 22px;gap:20px}
 .logo{display:flex;align-items:center;gap:10px;min-width:215px}.coin{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffe46b,#f09a00);border:2px solid #fff1a3;color:#201400;font-size:29px;font-weight:900;box-shadow:0 0 25px #ffb30066}.logo b{font-size:29px;font-style:italic;letter-spacing:-1px;background:linear-gradient(#fff1a0,#f3a800);color:transparent;background-clip:text}.logo small{display:block;color:#bbb;font-size:10px;letter-spacing:2px}
 .top-notice{flex:1;display:flex;justify-content:center;gap:10px}.notice{border:1px solid #6b4c00;background:#0b0b09;border-radius:11px;padding:10px 16px;color:#ddd;font-size:12px}.notice strong{color:var(--gold2)}
@@ -22,8 +22,14 @@ button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.plan{background:#070706;border:1px solid #5a4200;border-radius:14px;padding:15px;text-align:left;color:#fff;transition:.2s}.plan:hover,.plan.selected{border-color:#ffd24a;box-shadow:0 0 22px #ffb30018;transform:translateY(-2px)}.plan .pc{font-size:26px;color:var(--gold2)}.plan .amt{font-size:26px;font-weight:900;margin:4px 0 8px}.pline{padding:6px 0;border-top:1px solid #292006;font-size:10px;color:#999}.pline b{display:block;color:#fff;font-size:11px;margin-top:2px}.activate{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px;font-size:10px;color:#888}
 .info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.info .card2{display:flex;gap:10px;align-items:center;border:1px solid #493600;background:#0a0a08;border-radius:13px;padding:12px}.card2 i{font-style:normal;font-size:23px;color:var(--gold2)}.card2 b{font-size:11px}.card2 p{font-size:9px;color:#777;margin:3px 0 0}
 .bottom{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}.list{display:grid;gap:6px}.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #282006;padding:8px 0;font-size:10px}.row small{display:block;color:#777;font-size:8px;margin-top:2px}.amount{color:var(--gold2);font-weight:900}.empty{text-align:center;color:#777;padding:25px;font-size:11px}
-.page{display:none}.page.active{display:block}.subpage{display:none}.subpage.active{display:block}.walletbox{display:grid;grid-template-columns:2fr 1fr;gap:10px}.bigbalance{padding:30px;border:1px solid #654900;border-radius:15px;background:#0b0b09}.bigbalance span{font-size:10px;color:#888}.bigbalance b{display:block;font-size:42px;color:var(--gold2);margin:7px 0}.teams{display:grid;gap:8px}.teamrow{display:flex;justify-content:space-between;padding:12px;border:1px solid #352805;border-radius:10px;background:#070706}.teamrow small{display:block;color:#777}.teamrow span{color:var(--gold2);font-size:10px}.refbox{text-align:center;padding:35px}.copy{display:flex;max-width:700px;margin:15px auto}.copy input{flex:1;border-radius:8px 0 0 8px}.copy button{border:0;background:linear-gradient(#ffd84a,#e89a00);font-weight:900;border-radius:0 8px 8px 0;padding:0 16px}.task{text-align:center;padding:50px 20px}.timer{font-size:40px;color:var(--gold2);font-family:monospace;font-weight:900;margin:15px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.adminstat{padding:20px;border:1px solid #493600;border-radius:13px;background:#0a0a08}.adminstat b{font-size:25px;color:var(--gold2);display:block}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:10px}.table th,.table td{padding:10px;border-bottom:1px solid #2e2307;text-align:left;white-space:nowrap}
+.page{display:none}.page.active{display:block}.subpage{display:none}.subpage.active{display:block}.walletbox{display:grid;grid-template-columns:2fr 1fr;gap:10px}.bigbalance{padding:30px;border:1px solid #654900;border-radius:15px;background:#0b0b09}.bigbalance span{font-size:10px;color:#888}.bigbalance b{display:block;font-size:42px;color:var(--gold2);margin:7px 0}.teams{display:grid;gap:8px}.teamrow{display:flex;justify-content:space-between;padding:12px;border:1px solid #352805;border-radius:10px;background:#070706}.teamrow small{display:block;color:#777}.teamrow span{color:var(--gold2);font-size:10px}.refbox{text-align:center;padding:35px}.copy{display:flex;max-width:700px;margin:15px auto}.copy input{flex:1;border-radius:8px 0 0 8px}.copy button{border:0;background:linear-gradient(#ffd84a,#e89a00);font-weight:900;border-radius:0 8px 8px 0;padding:0 16px}.task{text-align:center;padding:50px 20px}.timer{font-size:40px;color:var(--gold2);font-family:monospace;font-weight:900;margin:15px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.adminstat{padding:20px;border:1px solid #493600;border-radius:13px;background:#0a0a08}.adminstat b{font-size:25px;color:var(--gold2);display:block}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:11px}.table th,.table td{padding:10px;border-bottom:1px solid #2e2307;text-align:left;white-space:nowrap}.table th{background:#110e05;color:var(--gold2)}
 .footer{border-top:1px solid #493600;margin-top:30px;padding:22px;text-align:center;color:#777;font-size:10px}
+.admin-header{border-bottom:1px solid #5c4300;padding-bottom:15px;margin-bottom:20px}
+.admin-header h1{font-size:28px;margin:0;color:var(--gold2)}
+.admin-header p{margin:5px 0 0;color:#aaa;font-size:12px}
+.admin-actions-bar{display:flex;gap:10px;margin-top:15px}
+.badge-active{color:var(--green);font-weight:bold}
+.badge-paused{color:#ff5555;font-weight:bold}
 @media(max-width:1050px){.top-notice{display:none}.plans{grid-template-columns:repeat(2,1fr)}.stats,.info{grid-template-columns:repeat(2,1fr)}.bottom{grid-template-columns:1fr}.admin-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.top{height:66px;padding:0 10px}.logo{min-width:0}.logo b{font-size:22px}.logo small{display:none}.top .coin{width:40px;height:40px;font-size:23px}.nav-user .btn{padding:8px}.dashboard{grid-template-columns:1fr}.sidebar{position:relative;top:0;min-height:0}.side-nav{grid-template-columns:repeat(2,1fr)}.recent,.side-note{display:none}.dashhead{align-items:flex-start}.userpill{display:none}.banner h1{font-size:31px}.banner .bigcoin{display:none}.walletbox{grid-template-columns:1fr}}
 @media(max-width:480px){.wrap{padding:10px}.stats,.info,.plans,.admin-grid{grid-template-columns:1fr}.side-nav{grid-template-columns:1fr 1fr}.landing-box{padding:45px 18px}.landing-box .bigcoin{font-size:65px}h1{font-size:39px}.copy{flex-direction:column;gap:7px}.copy input{border-radius:8px}.copy button{border-radius:8px;padding:11px}}
@@ -50,13 +56,21 @@ button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 
 <section id="login" class="page"><div class="auth card">
 <h2>Bitcoin Login</h2><p style="color:#888;font-size:12px">Sign in to your member dashboard.</p>
-<form onsubmit="login(event)"><input id="li" class="field" required placeholder="User ID or Email"><input id="lp" class="field" type="password" required placeholder="Password"><button class="btn gold wide">Login</button></form>
+<form onsubmit="login(event)"><input id="li" class="field" required placeholder="User ID, Email or Mobile"><input id="lp" class="field" type="password" required placeholder="Password"><button class="btn gold wide">Login</button></form>
 <p style="font-size:11px;color:#777;text-align:center">New member? <button class="btn" onclick="go('register')">Create Account</button></p>
 </div></section>
 
 <section id="register" class="page"><div class="auth card">
-<h2>Create Bitcoin Account</h2><p style="color:#888;font-size:12px">Create a local demo member account.</p>
-<form onsubmit="register(event)"><input id="rn" class="field" required placeholder="Full Name"><input id="re" class="field" required type="email" placeholder="Email"><input id="rp" class="field" required type="password" placeholder="Password"><input id="rr" class="field" placeholder="Referral ID (optional)"><button class="btn gold wide">Register</button></form>
+<h2>Create Bitcoin Account</h2><p style="color:#888;font-size:12px">Create a new member account.</p>
+<form onsubmit="register(event)">
+  <input id="rn" class="field" required placeholder="Full Name">
+  <input id="rm" class="field" required placeholder="Mobile Number">
+  <input id="re" class="field" required type="email" placeholder="Email Address">
+  <input id="rp" class="field" required type="password" placeholder="Password">
+  <input id="rpin" class="field" required type="password" maxlength="6" pattern="\d{6}" placeholder="6-Digit Transaction PIN">
+  <input id="rr" class="field" placeholder="Referral ID (optional)">
+  <button class="btn gold wide">Register</button>
+</form>
 </div></section>
 
 <section id="dashboard" class="page">
@@ -74,7 +88,7 @@ button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
   <button class="side side-task" data-tab="task" onclick="tab('task')"><i>▶</i>Video Task <small>(1 Time/Day)</small></button>
  </nav>
  <div class="recent"><h4>Recent Activities</h4><div id="recent"></div></div>
- <div class="side-note"><b>Bitcoin Demo</b><br>Virtual credits only. This website does not process real deposits, withdrawals or crypto transfers.</div>
+ <div class="side-note"><b>Bitcoin System</b><br>Virtual credits & tasks portal.</div>
 </aside>
 
 <div class="main">
@@ -86,10 +100,10 @@ button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
   <div class="stat"><div class="ico">💰</div><small>Virtual Balance</small><b id="balance">₹0.00</b><span>Demo credits</span></div>
   <div class="stat"><div class="ico">📦</div><small>Current Plan</small><b id="planname">None</b><span id="plandaily">No daily reward</span></div>
   <div class="stat"><div class="ico">👥</div><small>My Team</small><b id="refcount">0</b><span>Direct referrals</span></div>
-  <div class="stat"><div class="ico">✓</div><small>Status</small><b class="goldtxt">Active</b><span id="dashuid">BTC0000</span></div>
+  <div class="stat"><div class="ico">✓</div><small>Status</small><b class="goldtxt" id="userstatus">Active</b><span id="dashuid">BTC0000</span></div>
  </div>
  <div class="section"><div class="section-head"><div><h3>Investment Packages</h3><p>Virtual demo packages</p></div><button class="btn" onclick="tab('plans')">View All</button></div><div id="plans-home" class="plans"></div><div class="activate"><button class="btn gold" onclick="activate()">⚡ Activate Selected</button><span id="selected-home">Select a plan.</span></div></div>
- <div class="info"><div class="card2"><i>🛡</i><div><b>Safe & Secure</b><p>Local browser demo data.</p></div></div><div class="card2"><i>👥</i><div><b>Grow Your Network</b><p>Demo referral center.</p></div></div><div class="card2"><i>📈</i><div><b>Daily Earnings</b><p>Virtual task rewards.</p></div></div><div class="card2"><i>🤝</i><div><b>Referral Center</b><p>Share your demo ID.</p></div></div></div>
+ <div class="info"><div class="card2"><i>🛡</i><div><b>Safe & Secure</b><p>Protected panel system.</p></div></div><div class="card2"><i>👥</i><div><b>Grow Your Network</b><p>Referral center.</p></div></div><div class="card2"><i>📈</i><div><b>Daily Earnings</b><p>Task rewards.</p></div></div><div class="card2"><i>🤝</i><div><b>Referral Center</b><p>Share your ID.</p></div></div></div>
  <div class="bottom"><div class="section"><div class="section-head"><h3>Recent Activities</h3></div><div id="history-home" class="list"></div></div><div class="section"><div class="section-head"><h3>Plan Overview</h3></div><div id="overview" class="empty"></div></div><div class="section"><div class="section-head"><h3>Your Balance</h3></div><div id="balance2" class="bigbalance" style="padding:18px;text-align:center"><b>₹0.00</b></div></div></div>
 </div>
 
@@ -99,32 +113,133 @@ button,input{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 <div class="bigbalance"><span>Wallet Balance</span><b id="walletbal">₹0.00</b><small style="color:#777">Balance changes only after admin approval.</small></div>
 <div class="card" style="display:grid;gap:8px"><button class="btn" onclick="showAdd()">➕ Add Wallet Balance</button><button class="btn" onclick="showWithdraw()">↘ Withdraw (Min ₹110)</button></div>
 </div>
-<div id="addbox" class="section hidden"><h3>Add Wallet Balance</h3><p style="color:#777;font-size:11px">For a real-money deployment, connect a compliant payment gateway/backend. This HTML page only records a payment-proof request; it does not move money or auto-credit a balance.</p>
+<div id="addbox" class="section hidden"><h3>Add Wallet Balance</h3><p style="color:#777;font-size:11px">Submit your payment request for admin approval.</p>
 <label style="font-size:10px;color:#aaa">Amount (minimum ₹110)</label><input id="depamt" class="field" type="number" min="110" placeholder="110">
 <label style="font-size:10px;color:#aaa">Payment method</label><select id="depmethod" class="field"><option>GPay</option><option>Paytm</option><option>PhonePe</option><option>UPI</option></select>
 <label style="font-size:10px;color:#aaa">UTR / Transaction reference</label><input id="deputr" class="field" placeholder="Enter UTR">
 <label style="font-size:10px;color:#aaa">Payment screenshot</label><input id="depshot" class="field" type="file" accept="image/*">
 <div style="font-size:11px;color:#bbb;line-height:1.6;margin:7px 0">Hindi: <b>Deposit me time lag sakta hai — admin approval ke baad balance update hoga.</b><br>English: <b>Deposits may take 10–30 minutes to appear after admin approval.</b></div>
 <button class="btn gold" onclick="submitDeposit()">Submit Payment Proof</button></div>
-<div id="withdrawbox" class="section hidden"><h3>Withdraw Request</h3><p style="color:#777;font-size:11px">Minimum withdrawal is ₹110. Only eligible, admin-approved balance can be requested.</p><input id="wamt" class="field" type="number" min="110" placeholder="Amount (min ₹110)"><input id="wupi" class="field" placeholder="Your UPI ID"><button class="btn gold" onclick="submitWithdraw()">Submit Withdrawal Request</button></div><div class="section"><h3>Wallet Activity</h3><div id="wallet-history" class="list"></div></div></div>
+<div id="withdrawbox" class="section hidden"><h3>Withdraw Request</h3><p style="color:#777;font-size:11px">Minimum withdrawal is ₹110.</p><input id="wamt" class="field" type="number" min="110" placeholder="Amount (min ₹110)"><input id="wupi" class="field" placeholder="Your UPI ID"><button class="btn gold" onclick="submitWithdraw()">Submit Withdrawal Request</button></div><div class="section"><h3>Wallet Activity</h3><div id="wallet-history" class="list"></div></div></div>
 
-<div id="sub-team" class="subpage"><div class="section"><div class="section-head"><div><h3>My Team</h3><p>Direct demo referrals</p></div><b id="teamnum" class="goldtxt">0</b></div><div id="teamlist" class="teams"></div></div></div>
+<div id="sub-team" class="subpage"><div class="section"><div class="section-head"><div><h3>My Team</h3><p>Direct referrals</p></div><b id="teamnum" class="goldtxt">0</b></div><div id="teamlist" class="teams"></div></div></div>
 
 <div id="sub-history" class="subpage"><div class="section"><div class="section-head"><h3>Complete History</h3></div><div id="history-full" class="list"></div></div></div>
 
-<div id="sub-referral" class="subpage"><div class="section refbox"><div style="font-size:45px;color:#ffd24a">↗</div><h3>Referral Center</h3><p style="color:#777;font-size:11px">Share your demo referral link.</p><div class="copy"><input id="reflink" class="field" readonly><button onclick="copyRef()">Copy</button></div><div id="reflist" class="teams"></div></div></div>
+<div id="sub-referral" class="subpage"><div class="section refbox"><div style="font-size:45px;color:#ffd24a">↗</div><h3>Referral Center</h3><p style="color:#777;font-size:11px">Share your referral link.</p><div class="copy"><input id="reflink" class="field" readonly><button onclick="copyRef()">Copy</button></div><div id="reflist" class="teams"></div></div></div>
 
-<div id="sub-support" class="subpage"><div class="section" style="text-align:center;padding:60px 20px"><div style="font-size:45px;color:#ffd24a">◉</div><h3>Support</h3><p style="color:#777;font-size:11px">Create a simulated support ticket stored in this browser.</p><button class="btn gold" onclick="support()">Create Demo Ticket</button></div></div>
+<div id="sub-support" class="subpage"><div class="section" style="text-align:center;padding:60px 20px"><div style="font-size:45px;color:#ffd24a">◉</div><h3>Support</h3><p style="color:#777;font-size:11px">Create a support ticket for admin review.</p>
+<textarea id="ticketmsg" class="field" placeholder="Describe your problem..." style="max-width:500px;height:100px;margin:auto;display:block"></textarea><br>
+<button class="btn gold" onclick="support()">Create Support Ticket</button></div></div>
 
-<div id="sub-task" class="subpage"><div class="section task"><div class="eyebrow">DAILY VIDEO TASK</div><h3>Complete Today's Demo Task</h3><p id="tasktext" style="color:#777;font-size:11px">Choose a plan first.</p><div id="taskstatus" class="goldtxt">Plan required</div><div id="timer" class="timer hidden">00:10</div><button id="taskbtn" class="btn gold" onclick="task()">Start Demo Task</button></div></div>
+<div id="sub-task" class="subpage"><div class="section task"><div class="eyebrow">DAILY VIDEO TASK</div><h3>Complete Today's Task</h3><p id="tasktext" style="color:#777;font-size:11px">Choose a plan first.</p><div id="taskstatus" class="goldtxt">Plan required</div><div id="timer" class="timer hidden">00:10</div><button id="taskbtn" class="btn gold" onclick="task()">Start Task</button></div></div>
 </div></div>
 </section>
 
+<!-- ADMIN SECTION -->
 <section id="admin" class="page">
-<div class="section"><div class="eyebrow">DEMO ADMIN</div><h2>Admin Dashboard</h2><p style="color:#777;font-size:11px">Local demo controls only.</p></div>
-<div class="admin-grid"><div class="adminstat">Users<b id="au">0</b></div><div class="adminstat">Active Plans<b id="ap">0</b></div><div class="adminstat">Virtual Balance<b id="ab">₹0</b></div><div class="adminstat">Open Tickets<b id="at">0</b></div></div>
-<div class="section"><div class="tablewrap"><table class="table"><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Balance</th><th>Plan</th><th>Action</th></tr></thead><tbody id="users"></tbody></table></div></div>
+<div class="admin-header">
+  <h1>BITCoin</h1>
+  <p style="color:var(--gold2);font-weight:bold;letter-spacing:1px">P2P & AD INVESTMENT PLATFORM</p>
+  <h2>🛠️ Admin Control Panel</h2>
+  <p>Manage users, deposits, support tickets & withdrawals.</p>
+  <div class="admin-actions-bar">
+    <button class="btn gold" onclick="alert('Telegram Link Tested Successfully!')">Test Telegram</button>
+    <button class="btn red" onclick="go('home')">Exit Admin</button>
+  </div>
+</div>
+
+<div class="admin-grid">
+  <div class="adminstat">Total System Users<b id="au">0</b></div>
+  <div class="adminstat">Pending Deposits<b id="ad">0</b></div>
+  <div class="adminstat">Pending Withdrawals<b id="aw">0</b></div>
+  <div class="adminstat">Support Tickets<b id="at">0</b></div>
+</div>
+
+<br>
+<div class="section">
+  <div class="section-head"><h3>All Registered Users & Controls</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Login / Password</th>
+          <th>Name / Gmail</th>
+          <th>Balance</th>
+          <th>Upline</th>
+          <th>IP Address</th>
+          <th>Status</th>
+          <th>History</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="users"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h3>Support Tickets & Problems</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>UID</th>
+          <th>Message</th>
+          <th>Screenshot</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-tickets"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h3>Deposit Verification Requests</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Amount</th>
+          <th>UTR ID</th>
+          <th>IP</th>
+          <th>Proof</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-deposits"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h3>Withdrawal Requests</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Amount</th>
+          <th>Destination UPI/QR</th>
+          <th>IP</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-withdrawals"></tbody>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center;padding:20px;font-size:12px;color:#aaa">
+  📢 <a href="#" style="color:var(--gold2)">Official Channel</a> &nbsp;|&nbsp; 💬 <a href="#" style="color:var(--gold2)">Chat with Bitcoin Support</a><br><br>
+  © 2026 BitCoin Platform. All Rights Reserved. | Official Telegram Channel
+</div>
 </section>
+
 </main>
 <footer class="footer">© 2026 Bitcoin • Watch • Earn • Grow • Member Portal • <a href="#admin" onclick="go('admin');return false" style="color:#ffd24a">Admin</a></footer>
 
@@ -135,18 +250,22 @@ const PLANS={
   550:{amount:550,daily:50,total:750,days:15,points:550},
   1100:{amount:1100,daily:100,total:1500,days:15,points:1100}
 };
+
 let db=JSON.parse(localStorage.getItem('bitcoin_gold_demo')||'null');
 if(!db){
   const old=JSON.parse(localStorage.getItem('bitcoin_db')||'null');
   if(old && old.users){ db=old; }
 }
-if(!db) db={users:[],tickets:[],currentUser:null};
+if(!db) db={users:[],tickets:[],deposits:[],withdrawals:[],currentUser:null};
+
 let selected=110;
+let userIP = '152.59.173.48'; // Simulated Real Client IP
 
 function save(){localStorage.setItem('bitcoin_gold_demo',JSON.stringify(db))}
 function uid(){return 'BTC'+Math.floor(1000+Math.random()*9000)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function addHistory(u,type,amount,details){u.history=u.history||[];u.history.push({type,amount:Number(amount||0),details,date:new Date().toISOString()})}
+
 function go(id){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   const el=document.getElementById(id); if(el)el.classList.add('active');
@@ -154,28 +273,70 @@ function go(id){
   if(id==='dashboard')loadDashboard();
   if(id==='admin')loadAdmin();
 }
+
 function updateNav(){
   const logged=!!db.currentUser;
   document.getElementById('nav-auth').classList.toggle('hidden',logged);
   document.getElementById('nav-user').classList.toggle('hidden',!logged);
   if(logged)document.getElementById('nav-name').textContent=db.currentUser.name+' · '+db.currentUser.uid;
 }
+
 function register(e){
  e.preventDefault();
- const name=document.getElementById('rn').value.trim(),email=document.getElementById('re').value.trim().toLowerCase(),pass=document.getElementById('rp').value,ref=document.getElementById('rr').value.trim().toUpperCase();
+ const name=document.getElementById('rn').value.trim();
+ const mobile=document.getElementById('rm').value.trim();
+ const email=document.getElementById('re').value.trim().toLowerCase();
+ const pass=document.getElementById('rp').value;
+ const pin=document.getElementById('rpin').value;
+ const ref=document.getElementById('rr').value.trim().toUpperCase();
+
  if(db.users.some(u=>u.email===email)){alert('Email already registered.');return}
+ if(db.users.some(u=>u.mobile===mobile)){alert('Mobile number already registered.');return}
  if(ref&&!db.users.some(u=>u.uid===ref)){alert('Referral ID not found.');return}
- const u={uid:uid(),name,email,pass,balance:0,upline:ref,plan:null,lastTask:null,history:[]};
- addHistory(u,'Registration',0,'Demo account created');db.users.push(u);save();
- alert('Account created. Your ID is '+u.uid);document.getElementById('li').value=email;document.getElementById('lp').value=pass;go('login');
+ 
+ const u={
+   uid:uid(),
+   name,
+   mobile,
+   email,
+   pass,
+   pin,
+   balance:0,
+   upline:ref||'None',
+   plan:null,
+   lastTask:null,
+   status:'Active',
+   ip: userIP,
+   history:[]
+ };
+ 
+ addHistory(u,'Registration',0,'Account created');
+ db.users.push(u);
+ save();
+ alert('Account created successfully! Your User ID is '+u.uid);
+ document.getElementById('li').value=u.uid;
+ document.getElementById('lp').value=pass;
+ go('login');
 }
+
 function login(e){
- e.preventDefault();const id=document.getElementById('li').value.trim().toLowerCase(),pass=document.getElementById('lp').value;
- const u=db.users.find(x=>(x.email===id||x.uid.toLowerCase()===id)&&x.pass===pass);
- if(!u){alert('Invalid login details.');return}
- db.currentUser=u;addHistory(u,'Login',0,'Demo login');save();go('dashboard');
+ e.preventDefault();
+ const id=document.getElementById('li').value.trim().toLowerCase();
+ const pass=document.getElementById('lp').value;
+ 
+ const u=db.users.find(x=>(x.email===id||x.uid.toLowerCase()===id||x.mobile===id)&&x.pass===pass);
+ if(!u){alert('Invalid login credentials.');return}
+ if(u.status==='Paused'){alert('Your account is paused by Admin.');return}
+ 
+ db.currentUser=u;
+ u.ip = userIP;
+ addHistory(u,'Login',0,'User login');
+ save();
+ go('dashboard');
 }
+
 function logout(){db.currentUser=null;save();go('home')}
+
 function cards(){
  return Object.values(PLANS).map(p=>`<button class="plan ${selected===p.amount?'selected':''}" onclick="selectPlan(${p.amount})">
  <div class="pc">₿</div><div class="amt">₹${p.amount}</div>
@@ -184,28 +345,35 @@ function cards(){
  <div class="pline">Total Earnings<b>${p.total} Points</b></div>
  <div class="pline">Validity<b>${p.days} Days</b></div></button>`).join('');
 }
+
 function selectPlan(a){selected=a;renderPlans();if(db.currentUser)loadDashboard()}
+
 function renderPlans(){
  const h=document.getElementById('plans-home'),f=document.getElementById('plans-full');
  if(h)h.innerHTML=cards();if(f)f.innerHTML=cards();
  const p=PLANS[selected];
  ['selected-home','selected-full'].forEach(id=>{const x=document.getElementById(id);if(x)x.textContent=`Selected: ₹${p.amount} · ${p.daily}/day · ${p.days} days`})
 }
+
 function activate(){
  if(!db.currentUser){go('login');return}
  const u=db.users.find(x=>x.uid===db.currentUser.uid),p=PLANS[selected];
- if(u.plan){alert('A demo plan is already active.');return}
- u.balance+=p.amount;u.plan=p;db.currentUser=u;addHistory(u,'Demo Plan Activated',p.amount,'Virtual package activated');save();loadDashboard();alert('Demo plan activated. ₹'+p.amount+' virtual credits added.');
+ if(u.plan){alert('A plan is already active.');return}
+ u.balance+=p.amount;u.plan=p;db.currentUser=u;addHistory(u,'Plan Activated',p.amount,'Package activated');save();loadDashboard();alert('Plan activated. ₹'+p.amount+' virtual credits added.');
 }
+
 function historyHTML(u,limit){
  let h=(u.history||[]).slice().reverse();if(limit)h=h.slice(0,limit);
  return h.length?h.map(x=>`<div class="row"><div><b>${esc(x.type)}</b><small>${esc(x.details)} · ${new Date(x.date).toLocaleString()}</small></div><span class="amount">${x.amount?'₹'+Number(x.amount).toFixed(2):'—'}</span></div>`).join(''):'<div class="empty">No activity yet.</div>';
 }
+
 function loadDashboard(){
  const u=db.users.find(x=>x.uid===db.currentUser.uid);if(!u){logout();return}db.currentUser=u;
  document.getElementById('dn').textContent=u.name;document.getElementById('duid').textContent=u.uid;document.getElementById('dashuid').textContent=u.uid;
  document.getElementById('balance').textContent='₹'+Number(u.balance).toFixed(2);document.getElementById('balance2').innerHTML='<b>₹'+Number(u.balance).toFixed(2)+'</b>';document.getElementById('walletbal').textContent='₹'+Number(u.balance).toFixed(2);
  document.getElementById('planname').textContent=u.plan?'₹'+u.plan.amount:'None';document.getElementById('plandaily').textContent=u.plan?'₹'+u.plan.daily+' virtual/day':'No daily reward';
+ document.getElementById('userstatus').textContent=u.status||'Active';
+ 
  const refs=db.users.filter(x=>x.upline===u.uid);document.getElementById('refcount').textContent=refs.length;document.getElementById('teamnum').textContent=refs.length;
  document.getElementById('reflink').value=location.href.split('#')[0]+'?ref='+u.uid;
  document.getElementById('plans-home').innerHTML=cards();document.getElementById('plans-full').innerHTML=cards();
@@ -217,50 +385,222 @@ function loadDashboard(){
  document.getElementById('teamlist').innerHTML=refs.length?refs.map(x=>`<div class="teamrow"><div><b>${esc(x.name)}</b><small>${esc(x.email)}</small></div><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty">No direct referrals yet.</div>';
  document.getElementById('reflist').innerHTML=refs.length?refs.map(x=>`<div class="teamrow"><b>${esc(x.name)}</b><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty">No referrals yet.</div>';
  const today=new Date().toISOString().slice(0,10),done=u.lastTask===today;
- document.getElementById('tasktext').textContent=u.plan?'Complete the demo task to receive ₹'+u.plan.daily+' virtual credits.':'Choose a plan first.';
+ document.getElementById('tasktext').textContent=u.plan?'Complete the daily task to receive ₹'+u.plan.daily+' credits.':'Choose a plan first.';
  document.getElementById('taskstatus').textContent=done?"Today's task completed":u.plan?'Task available':'Plan required';
- const b=document.getElementById('taskbtn');b.disabled=done||!u.plan;b.textContent=done?'Completed Today':'Start Demo Task';
+ const b=document.getElementById('taskbtn');b.disabled=done||!u.plan;b.textContent=done?'Completed Today':'Start Task';
 }
+
 function tab(t){
  document.querySelectorAll('.subpage').forEach(x=>x.classList.remove('active'));document.getElementById('sub-'+t).classList.add('active');
  document.querySelectorAll('.side').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));
  loadDashboard();
 }
+
 function task(){
- if(!db.currentUser||!db.currentUser.plan){alert('Activate a demo plan first.');return}
+ if(!db.currentUser||!db.currentUser.plan){alert('Activate a plan first.');return}
  const u=db.users.find(x=>x.uid===db.currentUser.uid),today=new Date().toISOString().slice(0,10);
  if(u.lastTask===today){alert('Already completed today.');return}
  const btn=document.getElementById('taskbtn'),timer=document.getElementById('timer');btn.disabled=true;timer.classList.remove('hidden');
  let n=10;timer.textContent='00:10';
- const iv=setInterval(()=>{n--;timer.textContent='00:'+String(n).padStart(2,'0');if(n<=0){clearInterval(iv);u.balance+=u.plan.daily;u.lastTask=today;addHistory(u,'Daily Demo Reward',u.plan.daily,'Virtual daily task completed');db.currentUser=u;save();loadDashboard();alert('Demo reward added: ₹'+u.plan.daily)}},1000);
+ const iv=setInterval(()=>{n--;timer.textContent='00:'+String(n).padStart(2,'0');if(n<=0){clearInterval(iv);u.balance+=u.plan.daily;u.lastTask=today;addHistory(u,'Daily Reward',u.plan.daily,'Daily task completed');db.currentUser=u;save();loadDashboard();alert('Reward added: ₹'+u.plan.daily)}},1000);
 }
+
 function copyRef(){const x=document.getElementById('reflink');navigator.clipboard?.writeText(x.value);alert('Referral link copied.')}
-function support(){if(!db.currentUser)return;db.tickets.push({id:'T'+Date.now(),uid:db.currentUser.uid,status:'Open'});addHistory(db.currentUser,'Support Ticket',0,'Demo ticket created');save();loadDashboard();alert('Demo support ticket created.')}
-function loadAdmin(){
- document.getElementById('au').textContent=db.users.length;document.getElementById('ap').textContent=db.users.filter(x=>x.plan).length;document.getElementById('ab').textContent='₹'+db.users.reduce((s,x)=>s+Number(x.balance||0),0).toFixed(0);document.getElementById('at').textContent=db.tickets.filter(x=>x.status==='Open').length;
- document.getElementById('users').innerHTML=db.users.map(u=>`<tr><td>${esc(u.uid)}</td><td>${esc(u.name)}</td><td>${esc(u.email)}</td><td>₹${Number(u.balance).toFixed(2)}</td><td>${u.plan?'₹'+u.plan.amount:'None'}</td><td><button class="btn" onclick="credit('${u.uid}')">+100 demo</button></td></tr>`).join('')||'<tr><td colspan="6">No users</td></tr>';
+
+function support(){
+  if(!db.currentUser)return;
+  const msg = document.getElementById('ticketmsg').value.trim();
+  if(!msg){alert('Please describe your problem.');return}
+  db.tickets=db.tickets||[];
+  db.tickets.push({id:'T'+Date.now(),uid:db.currentUser.uid,msg:msg,status:'Open',date:new Date().toISOString()});
+  addHistory(db.currentUser,'Support Ticket',0,'Ticket created');
+  document.getElementById('ticketmsg').value='';
+  save();loadDashboard();alert('Support ticket created successfully.');
 }
-function credit(id){const u=db.users.find(x=>x.uid===id);if(!u)return;u.balance+=100;addHistory(u,'Admin Demo Credit',100,'Virtual credit');save();loadAdmin();if(db.currentUser?.uid===id)loadDashboard()}
+
+function loadAdmin(){
+ db.deposits = db.deposits || [];
+ db.withdrawals = db.withdrawals || [];
+ db.tickets = db.tickets || [];
+
+ document.getElementById('au').textContent=db.users.length;
+ document.getElementById('ad').textContent=db.deposits.filter(x=>x.status==='Pending').length;
+ document.getElementById('aw').textContent=db.withdrawals.filter(x=>x.status==='Pending').length;
+ document.getElementById('at').textContent=db.tickets.filter(x=>x.status==='Open').length;
+
+ // All Users Table
+ document.getElementById('users').innerHTML=db.users.map(u=>`
+   <tr>
+     <td><b>${esc(u.uid)}</b></td>
+     <td>${esc(u.mobile||u.uid)}<br><small style="color:var(--gold2)">Pass: ${esc(u.pass)}</small><br><small style="color:#aaa">PIN: ${esc(u.pin||'None')}</small></td>
+     <td><b>${esc(u.name)}</b><br><small style="color:#aaa">${esc(u.email)}</small></td>
+     <td><b>₹${Number(u.balance).toFixed(2)}</b></td>
+     <td>${esc(u.upline||'None')}</td>
+     <td>${esc(u.ip||'152.59.173.48')}<br><small style="color:#777">Login: ${esc(u.ip||'152.59.173.48')}</small></td>
+     <td><span class="${u.status==='Paused'?'badge-paused':'badge-active'}">${esc(u.status||'Active')}</span></td>
+     <td><button class="btn" style="padding:4px 8px;font-size:9px" onclick="viewUserHistory('${u.uid}')">History</button></td>
+     <td>
+       <button class="btn ${u.status==='Paused'?'green':'red'}" style="padding:4px 8px;font-size:9px" onclick="toggleUserStatus('${u.uid}')">${u.status==='Paused'?'Activate':'Pause'}</button>
+       <button class="btn gold" style="padding:4px 8px;font-size:9px" onclick="credit('${u.uid}')">+₹100</button>
+     </td>
+   </tr>
+ `).join('')||'<tr><td colspan="9">No registered users</td></tr>';
+
+ // Tickets Table
+ document.getElementById('admin-tickets').innerHTML=db.tickets.filter(x=>x.status==='Open').map(t=>`
+   <tr>
+     <td>${esc(t.id)}</td>
+     <td><b>${esc(t.uid)}</b></td>
+     <td>${esc(t.msg)}</td>
+     <td>No Proof</td>
+     <td><button class="btn gold" style="padding:4px 8px" onclick="closeTicket('${t.id}')">Close</button></td>
+   </tr>
+ `).join('')||'<tr><td colspan="5" style="text-align:center;color:#777">No open support tickets.</td></tr>';
+
+ // Deposits Table
+ document.getElementById('admin-deposits').innerHTML=db.deposits.filter(x=>x.status==='Pending').map(d=>`
+   <tr>
+     <td><b>${esc(d.uid)}</b></td>
+     <td>₹${d.amount}</td>
+     <td>${esc(d.utr)}</td>
+     <td>${esc(d.ip||'152.59.173.48')}</td>
+     <td><a href="${d.screenshot}" target="_blank" style="color:var(--gold2)">View Proof</a></td>
+     <td>
+       <button class="btn green" style="padding:4px 8px" onclick="approveDeposit('${d.id}')">Approve</button>
+       <button class="btn red" style="padding:4px 8px" onclick="rejectDeposit('${d.id}')">Reject</button>
+     </td>
+   </tr>
+ `).join('')||'<tr><td colspan="6" style="text-align:center;color:#777">No pending deposits.</td></tr>';
+
+ // Withdrawals Table
+ document.getElementById('admin-withdrawals').innerHTML=db.withdrawals.filter(x=>x.status==='Pending').map(w=>`
+   <tr>
+     <td><b>${esc(w.uid)}</b></td>
+     <td>₹${w.amount}</td>
+     <td>${esc(w.upi)}</td>
+     <td>${esc(w.ip||'152.59.173.48')}</td>
+     <td>
+       <button class="btn green" style="padding:4px 8px" onclick="approveWithdrawal('${w.id}')">Approve</button>
+       <button class="btn red" style="padding:4px 8px" onclick="rejectWithdrawal('${w.id}')">Reject</button>
+     </td>
+   </tr>
+ `).join('')||'<tr><td colspan="5" style="text-align:center;color:#777">No pending withdrawals.</td></tr>';
+}
+
+function toggleUserStatus(id){
+  const u=db.users.find(x=>x.uid===id);
+  if(!u)return;
+  u.status = u.status === 'Paused' ? 'Active' : 'Paused';
+  save();loadAdmin();
+}
+
+function viewUserHistory(id){
+  const u=db.users.find(x=>x.uid===id);
+  if(!u)return;
+  alert('History for ' + u.name + ' (' + u.uid + '):\n\n' + (u.history||[]).map(h=> h.type + ': ₹' + h.amount + ' (' + h.details + ')').join('\n'));
+}
+
+function credit(id){
+  const u=db.users.find(x=>x.uid===id);
+  if(!u)return;
+  u.balance+=100;
+  addHistory(u,'Admin Credit',100,'Virtual credit added');
+  save();loadAdmin();
+  if(db.currentUser?.uid===id)loadDashboard();
+}
+
+function closeTicket(id){
+  const t = db.tickets.find(x=>x.id===id);
+  if(t) t.status='Closed';
+  save();loadAdmin();
+}
+
+function approveDeposit(id){
+  const d = db.deposits.find(x=>x.id===id);
+  if(!d) return;
+  d.status = 'Approved';
+  const u = db.users.find(x=>x.uid===d.uid);
+  if(u){ u.balance += d.amount; addHistory(u,'Deposit Approved',d.amount,'UTR: '+d.utr); }
+  save();loadAdmin();
+}
+
+function rejectDeposit(id){
+  const d = db.deposits.find(x=>x.id===id);
+  if(!d) return;
+  d.status = 'Rejected';
+  save();loadAdmin();
+}
+
+function approveWithdrawal(id){
+  const w = db.withdrawals.find(x=>x.id===id);
+  if(!w) return;
+  w.status = 'Approved';
+  const u = db.users.find(x=>x.uid===w.uid);
+  if(u){ addHistory(u,'Withdrawal Complete',w.amount,'Sent to UPI: '+w.upi); }
+  save();loadAdmin();
+}
+
+function rejectWithdrawal(id){
+  const w = db.withdrawals.find(x=>x.id===id);
+  if(!w) return;
+  w.status = 'Rejected';
+  const u = db.users.find(x=>x.uid===w.uid);
+  if(u){ u.balance += w.amount; addHistory(u,'Withdrawal Refund',w.amount,'Request Rejected'); }
+  save();loadAdmin();
+}
 
 function showAdd(){document.getElementById('addbox').classList.remove('hidden');document.getElementById('withdrawbox').classList.add('hidden')}
 function showWithdraw(){document.getElementById('withdrawbox').classList.remove('hidden');document.getElementById('addbox').classList.add('hidden')}
+
 function submitDeposit(){
  if(!db.currentUser)return;
  const amt=Number(document.getElementById('depamt').value),utr=document.getElementById('deputr').value.trim(),method=document.getElementById('depmethod').value, f=document.getElementById('depshot').files[0];
  if(amt<110){alert('Minimum deposit request is ₹110.');return}
  if(!utr||!f){alert('Enter UTR and upload the payment screenshot.');return}
- const reader=new FileReader();reader.onload=()=>{db.deposits=db.deposits||[];db.deposits.push({id:'D'+Date.now(),uid:db.currentUser.uid,amount:amt,method,utr,screenshot:reader.result,status:'Pending',date:new Date().toISOString()});addHistory(db.currentUser,'Deposit Proof Submitted',amt,'UTR: '+utr);save();loadDashboard();alert('Payment proof submitted. Admin approval is required before the balance changes.');};reader.readAsDataURL(f)
+ const reader=new FileReader();
+ reader.onload=()=>{
+   db.deposits=db.deposits||[];
+   db.deposits.push({id:'D'+Date.now(),uid:db.currentUser.uid,amount:amt,method,utr,screenshot:reader.result,ip:userIP,status:'Pending',date:new Date().toISOString()});
+   addHistory(db.currentUser,'Deposit Request',amt,'UTR: '+utr);
+   save();loadDashboard();
+   alert('Payment proof submitted. Admin approval is required before the balance changes.');
+ };
+ reader.readAsDataURL(f);
 }
+
 function submitWithdraw(){
- if(!db.currentUser)return;const amt=Number(document.getElementById('wamt').value),upi=document.getElementById('wupi').value.trim(),u=db.users.find(x=>x.uid===db.currentUser.uid);
- if(amt<110){alert('Minimum withdrawal is ₹110.');return} if(amt>Number(u.balance)){alert('Insufficient approved balance.');return} if(!upi){alert('Enter your UPI ID.');return}
- db.withdrawals=db.withdrawals||[];db.withdrawals.push({id:'W'+Date.now(),uid:u.uid,amount:amt,upi,status:'Pending',date:new Date().toISOString()});addHistory(u,'Withdrawal Request',amt,'UPI: '+upi);save();loadDashboard();alert('Withdrawal request submitted for admin review.')
+ if(!db.currentUser)return;
+ const amt=Number(document.getElementById('wamt').value),upi=document.getElementById('wupi').value.trim(),u=db.users.find(x=>x.uid===db.currentUser.uid);
+ if(amt<110){alert('Minimum withdrawal is ₹110.');return} 
+ if(amt>Number(u.balance)){alert('Insufficient approved balance.');return} 
+ if(!upi){alert('Enter your UPI ID.');return}
+ 
+ u.balance -= amt;
+ db.withdrawals=db.withdrawals||[];
+ db.withdrawals.push({id:'W'+Date.now(),uid:u.uid,amount:amt,upi,ip:userIP,status:'Pending',date:new Date().toISOString()});
+ addHistory(u,'Withdrawal Request',amt,'UPI: '+upi);
+ save();loadDashboard();
+ alert('Withdrawal request submitted for admin review.');
 }
+
 function init(){
- if(!db.users.length){const a={uid:'BTCADMIN',name:'Demo Admin',email:'admin@bitcoin.demo',pass:'demo1234',balance:0,upline:'',plan:null,lastTask:null,history:[]};addHistory(a,'Account',0,'Demo administrator created');db.users.push(a);save()}
+ if(!db.users.length){
+   const a={uid:'jiobhart',name:'Admin Boss',email:'admin@bitcoin.com',mobile:'jiobhart',pass:'djdj6363',pin:'123456',balance:5000,upline:'None',plan:null,lastTask:null,status:'Active',ip:'Admin',history:[]};
+   addHistory(a,'Account',0,'Admin Account Created');
+   db.users.push(a);
+   
+   const demo1={uid:'BTC4838',name:'Ashish User',email:'ashish1@gmail.com',mobile:'9876543210',pass:'ashish@gmail.com',pin:'654321',balance:0,upline:'None',plan:null,lastTask:null,status:'Active',ip:'152.59.173.48',history:[]};
+   db.users.push(demo1);
+   
+   const demo2={uid:'BTC7928',name:'Ashish User 2',email:'ashish2@gmail.com',mobile:'9876543211',pass:'ashish@gmail.com',pin:'654321',balance:0,upline:'None',plan:null,lastTask:null,status:'Active',ip:'152.59.173.48',history:[]};
+   db.users.push(demo2);
+   
+   save();
+ }
  const params=new URLSearchParams(location.search),ref=params.get('ref');if(ref)document.getElementById('rr').value=ref;
  renderPlans();updateNav();
 }
+
 init();
 </script>
 </body>
