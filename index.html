@@ -1,96 +1,607 @@
-<!DOCTYPE html>
-<html lang="hi">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <style>
-        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }
-        .form-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #218838; }
-        #status { margin-top: 10px; font-weight: bold; text-align: center; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bitcoin — Watch • Earn • Grow</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#050505;color:#fff}
+:root{--gold:#ffbf19;--gold2:#ffdf67;--dark:#050505;--panel:#0b0b0b;--line:#493600;--muted:#a9a9a9;--green:#20d86b}
+body{background:radial-gradient(circle at 50% -10%,#3a2600 0,#090805 34%,#050505 70%);overflow-x:hidden}
+button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.top{position:sticky;top:0;z-index:50;height:76px;border-bottom:1px solid #5b4200;background:rgba(5,5,5,.96);backdrop-filter:blur(12px);display:flex;align-items:center;padding:0 22px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;min-width:215px}.coin{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#ffe46b,#f09a00);border:2px solid #fff1a3;color:#201400;font-size:29px;font-weight:900;box-shadow:0 0 25px #ffb30066}.logo b{font-size:29px;font-style:italic;letter-spacing:-1px;background:linear-gradient(#fff1a0,#f3a800);color:transparent;background-clip:text}.logo small{display:block;color:#bbb;font-size:10px;letter-spacing:2px}
+.top-notice{flex:1;display:flex;justify-content:center;gap:10px}.notice{border:1px solid #6b4c00;background:#0b0b09;border-radius:11px;padding:10px 16px;color:#ddd;font-size:12px}.notice strong{color:var(--gold2)}
+.nav-user{display:flex;align-items:center;gap:9px}.btn{border:1px solid #8b6200;background:#0b0b09;color:#fff;border-radius:9px;padding:10px 17px;font-weight:800}.btn.gold{background:linear-gradient(#ffd84a,#e89a00);border-color:#ffdf67;color:#130d00;box-shadow:0 0 15px #ffb30030}.btn.green{background:#12bf5b;border-color:#2ce879;color:#001b09}.btn.red{background:#3a1010;border-color:#7a2525;color:#ff9c9c}
+.wrap{max-width:1500px;margin:auto;padding:20px}.landing{min-height:calc(100vh - 76px);display:grid;place-items:center}.landing-box{width:min(1050px,100%);text-align:center;border:1px solid #5c4300;border-radius:25px;padding:70px 30px;background:radial-gradient(circle at 50% 0,#3a260055,transparent 55%),#090908;box-shadow:0 0 60px #ffb30010}.landing-box .bigcoin{font-size:90px;filter:drop-shadow(0 0 20px #ffb30066)}h1{font-size:clamp(40px,6vw,75px);margin:12px 0;font-weight:900}.goldtxt{color:var(--gold2)}.landing-box p{color:#aaa;max-width:680px;margin:0 auto 28px;line-height:1.7}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.auth{max-width:470px;margin:60px auto}.card{border:1px solid #503a00;background:linear-gradient(145deg,#0d0d0b,#080808);border-radius:18px;padding:25px;box-shadow:0 0 35px #ffb3000d}.card h2{margin-top:0;color:var(--gold2)}.field{width:100%;padding:13px;margin:6px 0 10px;background:#050505;border:1px solid #493600;border-radius:9px;color:#fff;outline:none}.field:focus{border-color:var(--gold);box-shadow:0 0 0 2px #ffbf1920}.wide{width:100%;margin-top:8px}
+.dashboard{display:grid;grid-template-columns:245px 1fr;gap:16px}.sidebar{border:1px solid #493600;border-radius:17px;background:#070706;padding:14px;min-height:calc(100vh - 116px);position:sticky;top:92px}.side-brand{display:flex;align-items:center;gap:9px;padding:8px 7px 16px;border-bottom:1px solid #2e2307;margin-bottom:10px}.side-brand .coin{width:38px;height:38px;font-size:21px}.side-brand b{font-size:19px;color:var(--gold2)}.side-brand small{display:block;font-size:8px;color:#888}.side-nav{display:grid;gap:5px}.side{width:100%;display:flex;align-items:center;gap:12px;background:transparent;color:#ddd;border:1px solid transparent;border-radius:10px;padding:12px;text-align:left}.side:hover,.side.active{background:linear-gradient(90deg,#3d2b00,#171207);border-color:#8c6300;color:#fff}.side i{font-style:normal;width:20px;text-align:center;font-size:18px}.side.active i{filter:drop-shadow(0 0 5px #ffbf19)}.side-task{margin-top:7px;border-top:1px solid #493600;padding-top:15px}.recent{margin-top:15px;padding-top:14px;border-top:1px solid #2e2307}.recent h4{font-size:11px;color:#ddd;margin:0 0 8px}.recent div{font-size:10px;color:#999;padding:6px 0}.side-note{margin-top:15px;padding:12px;border:1px solid #493600;border-radius:11px;color:#999;font-size:10px;line-height:1.5}.side-note b{color:var(--gold2)}
+.main{min-width:0}.dashhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.dashhead h2{margin:0;font-size:27px}.eyebrow{color:var(--gold);font-size:10px;font-weight:900;letter-spacing:2px;margin-bottom:5px}.userpill{display:flex;gap:9px;align-items:center;border:1px solid #493600;background:#090908;border-radius:12px;padding:7px 11px}.avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#ffe36a,#ed9c00);color:#211400;font-size:20px}.userpill small{display:block;color:#888;font-size:9px}.banner{position:relative;overflow:hidden;border:1px solid #755400;border-radius:18px;padding:26px;background:radial-gradient(circle at 85% 50%,#ffb3001c,transparent 36%),#0a0a08}.banner h1{font-size:42px;margin:8px 0}.banner p{color:#aaa;max-width:700px}.banner .bigcoin{position:absolute;right:7%;top:50%;transform:translateY(-50%);font-size:115px;opacity:.16}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:11px 0}.stat{border:1px solid #493600;background:#0b0b09;border-radius:13px;padding:14px}.stat .ico{font-size:23px}.stat small{display:block;color:#8e8e8e;font-size:9px;margin-top:7px}.stat b{display:block;font-size:20px;color:#fff;margin:2px 0}.stat span{font-size:9px;color:#777}
+.section{border:1px solid #493600;background:#0a0a08;border-radius:15px;padding:16px;margin-bottom:10px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.section h3{margin:0;font-size:17px}.section-head p{margin:3px 0 0;color:#777;font-size:10px}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.plan{background:#070706;border:1px solid #5a4200;border-radius:14px;padding:15px;text-align:left;color:#fff;transition:.2s}.plan:hover,.plan.selected{border-color:#ffd24a;box-shadow:0 0 22px #ffb30018;transform:translateY(-2px)}.plan .pc{font-size:26px;color:var(--gold2)}.plan .amt{font-size:26px;font-weight:900;margin:4px 0 8px}.pline{padding:6px 0;border-top:1px solid #292006;font-size:10px;color:#999}.pline b{display:block;color:#fff;font-size:11px;margin-top:2px}.activate{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:12px;font-size:10px;color:#888}
+.info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.info .card2{display:flex;gap:10px;align-items:center;border:1px solid #493600;background:#0a0a08;border-radius:13px;padding:12px}.card2 i{font-style:normal;font-size:23px;color:var(--gold2)}.card2 b{font-size:11px}.card2 p{font-size:9px;color:#777;margin:3px 0 0}
+.bottom{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}.list{display:grid;gap:6px}.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #282006;padding:8px 0;font-size:10px}.row small{display:block;color:#777;font-size:8px;margin-top:2px}.amount{color:var(--gold2);font-weight:900}.empty{text-align:center;color:#777;padding:25px;font-size:11px}
+.page{display:none}.page.active{display:block}.subpage{display:none}.subpage.active{display:block}.walletbox{display:grid;grid-template-columns:2fr 1fr;gap:10px}.bigbalance{padding:30px;border:1px solid #654900;border-radius:15px;background:#0b0b09}.bigbalance span{font-size:10px;color:#888}.bigbalance b{display:block;font-size:42px;color:var(--gold2);margin:7px 0}.teams{display:grid;gap:8px}.teamrow{display:flex;justify-content:space-between;padding:12px;border:1px solid #352805;border-radius:10px;background:#070706}.teamrow small{display:block;color:#777}.teamrow span{color:var(--gold2);font-size:10px}.refbox{text-align:center;padding:35px}.copy{display:flex;max-width:700px;margin:15px auto}.copy input{flex:1;border-radius:8px 0 0 8px}.copy button{border:0;background:linear-gradient(#ffd84a,#e89a00);font-weight:900;border-radius:0 8px 8px 0;padding:0 16px}.task{text-align:center;padding:50px 20px}.timer{font-size:40px;color:var(--gold2);font-family:monospace;font-weight:900;margin:15px}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.adminstat{padding:20px;border:1px solid #493600;border-radius:13px;background:#0a0a08}.adminstat b{font-size:25px;color:var(--gold2);display:block}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:11px}.table th,.table td{padding:10px;border-bottom:1px solid #2e2307;text-align:left;white-space:nowrap}.table th{background:#110e05;color:var(--gold2)}
+.footer{border-top:1px solid #493600;margin-top:30px;padding:22px;text-align:center;color:#777;font-size:10px}
+.admin-header{border-bottom:1px solid #5c4300;padding-bottom:15px;margin-bottom:20px}
+.admin-header h1{font-size:28px;margin:0;color:var(--gold2)}
+.admin-header p{margin:5px 0 0;color:#aaa;font-size:12px}
+.admin-actions-bar{display:flex;gap:10px;margin-top:15px}
+.badge-active{color:var(--green);font-weight:bold}
+.badge-paused{color:#ff5555;font-weight:bold}
+@media(max-width:1050px){.top-notice{display:none}.plans{grid-template-columns:repeat(2,1fr)}.stats,.info{grid-template-columns:repeat(2,1fr)}.bottom{grid-template-columns:1fr}.admin-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.top{height:66px;padding:0 10px}.logo{min-width:0}.logo b{font-size:22px}.logo small{display:none}.top .coin{width:40px;height:40px;font-size:23px}.nav-user .btn{padding:8px}.dashboard{grid-template-columns:1fr}.sidebar{position:relative;top:0;min-height:0}.side-nav{grid-template-columns:repeat(2,1fr)}.recent,.side-note{display:none}.dashhead{align-items:flex-start}.userpill{display:none}.banner h1{font-size:31px}.banner .bigcoin{display:none}.walletbox{grid-template-columns:1fr}}
+@media(max-width:480px){.wrap{padding:10px}.stats,.info,.plans,.admin-grid{grid-template-columns:1fr}.side-nav{grid-template-columns:1fr 1fr}.landing-box{padding:45px 18px}.landing-box .bigcoin{font-size:65px}h1{font-size:39px}.copy{flex-direction:column;gap:7px}.copy input{border-radius:8px}.copy button{border-radius:8px;padding:11px}}
+</style>
 </head>
 <body>
+<header class="top">
+  <div class="logo"><div class="coin">₿</div><div><b>Bitcoin</b><small>WATCH • EARN • GROW</small></div></div>
+  <div class="top-notice"><div class="notice">📢 <strong>Join Our Telegram Channel</strong></div><div class="notice">💬 Chat ID: <strong>69119930084</strong></div><div class="notice">🤖 <strong>Support Bot</strong></div></div>
+  <div class="nav-user" id="nav-auth"><button class="btn" onclick="go('login')">Login</button><button class="btn gold" onclick="go('register')">Register</button></div>
+  <div class="nav-user hidden" id="nav-user"><span id="nav-name"></span><button class="btn red" onclick="logout()">Logout</button></div>
+</header>
 
-<div class="form-card">
-    <h2>Register</h2>
-    <form id="registerForm">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" required>
-        </div>
-        <button type="submit">Submit</button>
-    </form>
-    <div id="status"></div>
+<main class="wrap">
+<section id="home" class="page active">
+  <div class="landing"><div class="landing-box">
+    <div class="bigcoin">₿</div>
+    <div class="eyebrow">BITCOIN MEMBER ECOSYSTEM</div>
+    <h1>Watch • Earn • <span class="goldtxt">Grow</span></h1>
+    <p>Modern Bitcoin-themed member dashboard with plans, wallet, team, history, referral and daily demo tasks.</p>
+    <div class="actions"><button class="btn gold" onclick="go('register')">Get Started</button><button class="btn" onclick="go('login')">Open Dashboard</button></div>
+  </div></div>
+</section>
+
+<section id="login" class="page"><div class="auth card">
+<h2>Bitcoin Login</h2><p style="color:#888;font-size:12px">Sign in to your member dashboard.</p>
+<form onsubmit="login(event)"><input id="li" class="field" required placeholder="User ID, Email or Mobile"><input id="lp" class="field" type="password" required placeholder="Password"><button class="btn gold wide">Login</button></form>
+<p style="font-size:11px;color:#777;text-align:center">New member? <button class="btn" onclick="go('register')">Create Account</button></p>
+</div></section>
+
+<section id="register" class="page"><div class="auth card">
+<h2>Create Bitcoin Account</h2><p style="color:#888;font-size:12px">Create a new member account.</p>
+<form onsubmit="register(event)">
+  <input id="rn" class="field" required placeholder="Full Name">
+  <input id="rm" class="field" required placeholder="Mobile Number">
+  <input id="re" class="field" required type="email" placeholder="Email Address">
+  <input id="rp" class="field" required type="password" placeholder="Password">
+  <input id="rpin" class="field" required type="password" maxlength="6" pattern="\d{6}" placeholder="6-Digit Transaction PIN">
+  <input id="rr" class="field" placeholder="Referral ID (optional)">
+  <button class="btn gold wide">Register</button>
+</form>
+</div></section>
+
+<section id="dashboard" class="page">
+<div class="dashboard">
+<aside class="sidebar">
+ <div class="side-brand"><div class="coin">₿</div><div><b>Bitcoin</b><small>MEMBER PANEL</small></div></div>
+ <nav class="side-nav">
+  <button class="side active" data-tab="home" onclick="tab('home')"><i>⌂</i>Home</button>
+  <button class="side" data-tab="plans" onclick="tab('plans')"><i>▤</i>Plans</button>
+  <button class="side" data-tab="wallet" onclick="tab('wallet')"><i>▣</i>Wallet</button>
+  <button class="side" data-tab="team" onclick="tab('team')"><i>♟</i>My Team</button>
+  <button class="side" data-tab="history" onclick="tab('history')"><i>◷</i>History</button>
+  <button class="side" data-tab="referral" onclick="tab('referral')"><i>↗</i>Referral</button>
+  <button class="side" data-tab="support" onclick="tab('support')"><i>◉</i>Support</button>
+  <button class="side side-task" data-tab="task" onclick="tab('task')"><i>▶</i>Video Task <small>(1 Time/Day)</small></button>
+ </nav>
+ <div class="recent"><h4>Recent Activities</h4><div id="recent"></div></div>
+ <div class="side-note"><b>Bitcoin System</b><br>Virtual credits & tasks portal.</div>
+</aside>
+
+<div class="main">
+<div class="dashhead"><div><div class="eyebrow">USER DASHBOARD</div><h2>Welcome, <span id="dn" class="goldtxt">Member</span> 👋</h2></div><div class="userpill"><div class="avatar">₿</div><div><b id="duid">BTC0000</b><small>Active Member</small></div></div></div>
+
+<div id="sub-home" class="subpage active">
+ <div class="banner"><div class="eyebrow">BITCOIN MEMBER AREA</div><h1>Welcome to <span class="goldtxt">Bitcoin</span></h1><p>Manage your virtual balance, plans, team, referrals, history and daily demo tasks from one place.</p><div class="bigcoin">₿</div></div>
+ <div class="stats">
+  <div class="stat"><div class="ico">💰</div><small>Virtual Balance</small><b id="balance">₹0.00</b><span>Demo credits</span></div>
+  <div class="stat"><div class="ico">📦</div><small>Current Plan</small><b id="planname">None</b><span id="plandaily">No daily reward</span></div>
+  <div class="stat"><div class="ico">👥</div><small>My Team</small><b id="refcount">0</b><span>Direct referrals</span></div>
+  <div class="stat"><div class="ico">✓</div><small>Status</small><b class="goldtxt" id="userstatus">Active</b><span id="dashuid">BTC0000</span></div>
+ </div>
+ <div class="section"><div class="section-head"><div><h3>Investment Packages</h3><p>Virtual demo packages</p></div><button class="btn" onclick="tab('plans')">View All</button></div><div id="plans-home" class="plans"></div><div class="activate"><button class="btn gold" onclick="activate()">⚡ Activate Selected</button><span id="selected-home">Select a plan.</span></div></div>
+ <div class="info"><div class="card2"><i>🛡</i><div><b>Safe & Secure</b><p>Protected panel system.</p></div></div><div class="card2"><i>👥</i><div><b>Grow Your Network</b><p>Referral center.</p></div></div><div class="card2"><i>📈</i><div><b>Daily Earnings</b><p>Task rewards.</p></div></div><div class="card2"><i>🤝</i><div><b>Referral Center</b><p>Share your ID.</p></div></div></div>
+ <div class="bottom"><div class="section"><div class="section-head"><h3>Recent Activities</h3></div><div id="history-home" class="list"></div></div><div class="section"><div class="section-head"><h3>Plan Overview</h3></div><div id="overview" class="empty"></div></div><div class="section"><div class="section-head"><h3>Your Balance</h3></div><div id="balance2" class="bigbalance" style="padding:18px;text-align:center"><b>₹0.00</b></div></div></div>
 </div>
 
+<div id="sub-plans" class="subpage"><div class="section"><div class="section-head"><div><h3>Bitcoin Plans</h3><p>Choose a virtual demo package.</p></div></div><div id="plans-full" class="plans"></div><div class="activate"><button class="btn gold" onclick="activate()">⚡ Activate Selected</button><span id="selected-full">Select a plan.</span></div></div></div>
+
+<div id="sub-wallet" class="subpage"><div class="walletbox">
+<div class="bigbalance"><span>Wallet Balance</span><b id="walletbal">₹0.00</b><small style="color:#777">Balance changes only after admin approval.</small></div>
+<div class="card" style="display:grid;gap:8px"><button class="btn" onclick="showAdd()">➕ Add Wallet Balance</button><button class="btn" onclick="showWithdraw()">↘ Withdraw (Min ₹110)</button></div>
+</div>
+<div id="addbox" class="section hidden"><h3>Add Wallet Balance</h3><p style="color:#777;font-size:11px">Submit your payment request for admin approval.</p>
+<label style="font-size:10px;color:#aaa">Amount (minimum ₹110)</label><input id="depamt" class="field" type="number" min="110" placeholder="110">
+<label style="font-size:10px;color:#aaa">Payment method</label><select id="depmethod" class="field"><option>GPay</option><option>Paytm</option><option>PhonePe</option><option>UPI</option></select>
+<label style="font-size:10px;color:#aaa">UTR / Transaction reference</label><input id="deputr" class="field" placeholder="Enter UTR">
+<label style="font-size:10px;color:#aaa">Payment screenshot</label><input id="depshot" class="field" type="file" accept="image/*">
+<div style="font-size:11px;color:#bbb;line-height:1.6;margin:7px 0">Hindi: <b>Deposit me time lag sakta hai — admin approval ke baad balance update hoga.</b><br>English: <b>Deposits may take 10–30 minutes to appear after admin approval.</b></div>
+<button class="btn gold" onclick="submitDeposit()">Submit Payment Proof</button></div>
+<div id="withdrawbox" class="section hidden"><h3>Withdraw Request</h3><p style="color:#777;font-size:11px">Minimum withdrawal is ₹110.</p><input id="wamt" class="field" type="number" min="110" placeholder="Amount (min ₹110)"><input id="wupi" class="field" placeholder="Your UPI ID"><button class="btn gold" onclick="submitWithdraw()">Submit Withdrawal Request</button></div><div class="section"><h3>Wallet Activity</h3><div id="wallet-history" class="list"></div></div></div>
+
+<div id="sub-team" class="subpage"><div class="section"><div class="section-head"><div><h3>My Team</h3><p>Direct referrals</p></div><b id="teamnum" class="goldtxt">0</b></div><div id="teamlist" class="teams"></div></div></div>
+
+<div id="sub-history" class="subpage"><div class="section"><div class="section-head"><h3>Complete History</h3></div><div id="history-full" class="list"></div></div></div>
+
+<div id="sub-referral" class="subpage"><div class="section refbox"><div style="font-size:45px;color:#ffd24a">↗</div><h3>Referral Center</h3><p style="color:#777;font-size:11px">Share your referral link.</p><div class="copy"><input id="reflink" class="field" readonly><button onclick="copyRef()">Copy</button></div><div id="reflist" class="teams"></div></div></div>
+
+<div id="sub-support" class="subpage"><div class="section" style="text-align:center;padding:60px 20px"><div style="font-size:45px;color:#ffd24a">◉</div><h3>Support</h3><p style="color:#777;font-size:11px">Create a support ticket for admin review.</p>
+<textarea id="ticketmsg" class="field" placeholder="Describe your problem..." style="max-width:500px;height:100px;margin:auto;display:block"></textarea><br>
+<button class="btn gold" onclick="support()">Create Support Ticket</button></div></div>
+
+<div id="sub-task" class="subpage"><div class="section task"><div class="eyebrow">DAILY VIDEO TASK</div><h3>Complete Today's Task</h3><p id="tasktext" style="color:#777;font-size:11px">Choose a plan first.</p><div id="taskstatus" class="goldtxt">Plan required</div><div id="timer" class="timer hidden">00:10</div><button id="taskbtn" class="btn gold" onclick="task()">Start Task</button></div></div>
+</div></div>
+</section>
+
+<!-- ADMIN SECTION -->
+<section id="admin" class="page">
+<div class="admin-header">
+  <h1>BITCoin</h1>
+  <p style="color:var(--gold2);font-weight:bold;letter-spacing:1px">P2P & AD INVESTMENT PLATFORM</p>
+  <h2>🛠️ Admin Control Panel</h2>
+  <p>Manage users, deposits, support tickets & withdrawals.</p>
+  <div class="admin-actions-bar">
+    <button class="btn gold" onclick="alert('Telegram Link Tested Successfully!')">Test Telegram</button>
+    <button class="btn red" onclick="go('home')">Exit Admin</button>
+  </div>
+</div>
+
+<div class="admin-grid">
+  <div class="adminstat">Total System Users<b id="au">0</b></div>
+  <div class="adminstat">Pending Deposits<b id="ad">0</b></div>
+  <div class="adminstat">Pending Withdrawals<b id="aw">0</b></div>
+  <div class="adminstat">Support Tickets<b id="at">0</b></div>
+</div>
+
+<br>
+<div class="section">
+  <div class="section-head"><h3>All Registered Users & Controls</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Login / Password</th>
+          <th>Name / Gmail</th>
+          <th>Balance</th>
+          <th>Upline</th>
+          <th>IP Address</th>
+          <th>Status</th>
+          <th>History</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="users"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h3>Support Tickets & Problems</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Ticket ID</th>
+          <th>UID</th>
+          <th>Message</th>
+          <th>Screenshot</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-tickets"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h3>Deposit Verification Requests</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Amount</th>
+          <th>UTR ID</th>
+          <th>IP</th>
+          <th>Proof</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-deposits"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-head"><h3>Withdrawal Requests</h3></div>
+  <div class="tablewrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>UID</th>
+          <th>Amount</th>
+          <th>Destination UPI/QR</th>
+          <th>IP</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="admin-withdrawals"></tbody>
+    </table>
+  </div>
+</div>
+
+<div style="text-align:center;padding:20px;font-size:12px;color:#aaa">
+  📢 <a href="#" style="color:var(--gold2)">Official Channel</a> &nbsp;|&nbsp; 💬 <a href="#" style="color:var(--gold2)">Chat with Bitcoin Support</a><br><br>
+  © 2026 BitCoin Platform. All Rights Reserved. | Official Telegram Channel
+</div>
+</section>
+
+</main>
+<footer class="footer">© 2026 Bitcoin • Watch • Earn • Grow • Member Portal • <a href="#admin" onclick="go('admin');return false" style="color:#ffd24a">Admin</a></footer>
+
 <script>
-document.getElementById("registerForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Form reload hone se rokein
+const PLANS={
+  110:{amount:110,daily:12,total:180,days:15,points:110},
+  220:{amount:220,daily:50,total:350,days:7,points:220},
+  550:{amount:550,daily:50,total:750,days:15,points:550},
+  1100:{amount:1100,daily:100,total:1500,days:15,points:1100}
+};
 
-    // Bot details
-    const botToken = "7060236112:AAEio0n738JSADTKDVZaai0cIfjX-pmw7no";
-    const chatId = "6318395817";
+let db=JSON.parse(localStorage.getItem('bitcoin_gold_demo')||'null');
+if(!db){
+  const old=JSON.parse(localStorage.getItem('bitcoin_db')||'null');
+  if(old && old.users){ db=old; }
+}
+if(!db) db={users:[],tickets:[],deposits:[],withdrawals:[],currentUser:null};
 
-    // Form inputs fetch karein
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
+let selected=110;
+let userIP = '152.59.173.48'; // Simulated Real Client IP
 
-    // Status display
-    const statusDiv = document.getElementById("status");
-    statusDiv.style.color = "black";
-    statusDiv.innerText = "Sending...";
+function save(){localStorage.setItem('bitcoin_gold_demo',JSON.stringify(db))}
+function uid(){return 'BTC'+Math.floor(1000+Math.random()*9000)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function addHistory(u,type,amount,details){u.history=u.history||[];u.history.push({type,amount:Number(amount||0),details,date:new Date().toISOString()})}
 
-    // Telegram message format
-    const message = `🚨 *New User Registered!* \n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📱 *Phone:* ${phone}`;
+function go(id){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById(id); if(el)el.classList.add('active');
+  window.scrollTo(0,0); updateNav();
+  if(id==='dashboard')loadDashboard();
+  if(id==='admin')loadAdmin();
+}
 
-    // Telegram API Endpoint
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+function updateNav(){
+  const logged=!!db.currentUser;
+  document.getElementById('nav-auth').classList.toggle('hidden',logged);
+  document.getElementById('nav-user').classList.toggle('hidden',!logged);
+  if(logged)document.getElementById('nav-name').textContent=db.currentUser.name+' · '+db.currentUser.uid;
+}
 
-    // Fetch API request
-    fetch(telegramUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: message,
-            parse_mode: 'Markdown'
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            statusDiv.style.color = "green";
-            statusDiv.innerText = "Registered Successfully!";
-            document.getElementById("registerForm").reset();
-        } else {
-            statusDiv.style.color = "red";
-            statusDiv.innerText = "Failed to send notification.";
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        statusDiv.style.color = "red";
-        statusDiv.innerText = "Error sending data.";
-    });
-});
+function register(e){
+ e.preventDefault();
+ const name=document.getElementById('rn').value.trim();
+ const mobile=document.getElementById('rm').value.trim();
+ const email=document.getElementById('re').value.trim().toLowerCase();
+ const pass=document.getElementById('rp').value;
+ const pin=document.getElementById('rpin').value;
+ const ref=document.getElementById('rr').value.trim().toUpperCase();
+
+ if(db.users.some(u=>u.email===email)){alert('Email already registered.');return}
+ if(db.users.some(u=>u.mobile===mobile)){alert('Mobile number already registered.');return}
+ if(ref&&!db.users.some(u=>u.uid===ref)){alert('Referral ID not found.');return}
+ 
+ const u={
+   uid:uid(),
+   name,
+   mobile,
+   email,
+   pass,
+   pin,
+   balance:0,
+   upline:ref||'None',
+   plan:null,
+   lastTask:null,
+   status:'Active',
+   ip: userIP,
+   history:[]
+ };
+ 
+ addHistory(u,'Registration',0,'Account created');
+ db.users.push(u);
+ save();
+ alert('Account created successfully! Your User ID is '+u.uid);
+ document.getElementById('li').value=u.uid;
+ document.getElementById('lp').value=pass;
+ go('login');
+}
+
+function login(e){
+ e.preventDefault();
+ const id=document.getElementById('li').value.trim().toLowerCase();
+ const pass=document.getElementById('lp').value;
+ 
+ const u=db.users.find(x=>(x.email===id||x.uid.toLowerCase()===id||x.mobile===id)&&x.pass===pass);
+ if(!u){alert('Invalid login credentials.');return}
+ if(u.status==='Paused'){alert('Your account is paused by Admin.');return}
+ 
+ db.currentUser=u;
+ u.ip = userIP;
+ addHistory(u,'Login',0,'User login');
+ save();
+ go('dashboard');
+}
+
+function logout(){db.currentUser=null;save();go('home')}
+
+function cards(){
+ return Object.values(PLANS).map(p=>`<button class="plan ${selected===p.amount?'selected':''}" onclick="selectPlan(${p.amount})">
+ <div class="pc">₿</div><div class="amt">₹${p.amount}</div>
+ <div class="pline">Package Points<b>${p.points} Points</b></div>
+ <div class="pline">Earn Per Day<b>${p.daily} Points</b></div>
+ <div class="pline">Total Earnings<b>${p.total} Points</b></div>
+ <div class="pline">Validity<b>${p.days} Days</b></div></button>`).join('');
+}
+
+function selectPlan(a){selected=a;renderPlans();if(db.currentUser)loadDashboard()}
+
+function renderPlans(){
+ const h=document.getElementById('plans-home'),f=document.getElementById('plans-full');
+ if(h)h.innerHTML=cards();if(f)f.innerHTML=cards();
+ const p=PLANS[selected];
+ ['selected-home','selected-full'].forEach(id=>{const x=document.getElementById(id);if(x)x.textContent=`Selected: ₹${p.amount} · ${p.daily}/day · ${p.days} days`})
+}
+
+function activate(){
+ if(!db.currentUser){go('login');return}
+ const u=db.users.find(x=>x.uid===db.currentUser.uid),p=PLANS[selected];
+ if(u.plan){alert('A plan is already active.');return}
+ u.balance+=p.amount;u.plan=p;db.currentUser=u;addHistory(u,'Plan Activated',p.amount,'Package activated');save();loadDashboard();alert('Plan activated. ₹'+p.amount+' virtual credits added.');
+}
+
+function historyHTML(u,limit){
+ let h=(u.history||[]).slice().reverse();if(limit)h=h.slice(0,limit);
+ return h.length?h.map(x=>`<div class="row"><div><b>${esc(x.type)}</b><small>${esc(x.details)} · ${new Date(x.date).toLocaleString()}</small></div><span class="amount">${x.amount?'₹'+Number(x.amount).toFixed(2):'—'}</span></div>`).join(''):'<div class="empty">No activity yet.</div>';
+}
+
+function loadDashboard(){
+ const u=db.users.find(x=>x.uid===db.currentUser.uid);if(!u){logout();return}db.currentUser=u;
+ document.getElementById('dn').textContent=u.name;document.getElementById('duid').textContent=u.uid;document.getElementById('dashuid').textContent=u.uid;
+ document.getElementById('balance').textContent='₹'+Number(u.balance).toFixed(2);document.getElementById('balance2').innerHTML='<b>₹'+Number(u.balance).toFixed(2)+'</b>';document.getElementById('walletbal').textContent='₹'+Number(u.balance).toFixed(2);
+ document.getElementById('planname').textContent=u.plan?'₹'+u.plan.amount:'None';document.getElementById('plandaily').textContent=u.plan?'₹'+u.plan.daily+' virtual/day':'No daily reward';
+ document.getElementById('userstatus').textContent=u.status||'Active';
+ 
+ const refs=db.users.filter(x=>x.upline===u.uid);document.getElementById('refcount').textContent=refs.length;document.getElementById('teamnum').textContent=refs.length;
+ document.getElementById('reflink').value=location.href.split('#')[0]+'?ref='+u.uid;
+ document.getElementById('plans-home').innerHTML=cards();document.getElementById('plans-full').innerHTML=cards();
+ document.getElementById('selected-home').textContent=`Selected: ₹${PLANS[selected].amount} · ${PLANS[selected].daily}/day · ${PLANS[selected].days} days`;
+ document.getElementById('selected-full').textContent=`Selected: ₹${PLANS[selected].amount} · ${PLANS[selected].daily}/day · ${PLANS[selected].days} days`;
+ document.getElementById('overview').textContent=u.plan?`₹${u.plan.amount} plan · ${u.plan.daily} virtual/day · ${u.plan.days} days`:'Select a plan to get started.';
+ document.getElementById('history-home').innerHTML=historyHTML(u,5);document.getElementById('history-full').innerHTML=historyHTML(u);document.getElementById('wallet-history').innerHTML=historyHTML(u);
+ document.getElementById('recent').innerHTML=(u.history||[]).slice(-5).reverse().map(x=>`<div>● ${esc(x.type)}</div>`).join('')||'<div>No activity</div>';
+ document.getElementById('teamlist').innerHTML=refs.length?refs.map(x=>`<div class="teamrow"><div><b>${esc(x.name)}</b><small>${esc(x.email)}</small></div><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty">No direct referrals yet.</div>';
+ document.getElementById('reflist').innerHTML=refs.length?refs.map(x=>`<div class="teamrow"><b>${esc(x.name)}</b><span>${esc(x.uid)}</span></div>`).join(''):'<div class="empty">No referrals yet.</div>';
+ const today=new Date().toISOString().slice(0,10),done=u.lastTask===today;
+ document.getElementById('tasktext').textContent=u.plan?'Complete the daily task to receive ₹'+u.plan.daily+' credits.':'Choose a plan first.';
+ document.getElementById('taskstatus').textContent=done?"Today's task completed":u.plan?'Task available':'Plan required';
+ const b=document.getElementById('taskbtn');b.disabled=done||!u.plan;b.textContent=done?'Completed Today':'Start Task';
+}
+
+function tab(t){
+ document.querySelectorAll('.subpage').forEach(x=>x.classList.remove('active'));document.getElementById('sub-'+t).classList.add('active');
+ document.querySelectorAll('.side').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));
+ loadDashboard();
+}
+
+function task(){
+ if(!db.currentUser||!db.currentUser.plan){alert('Activate a plan first.');return}
+ const u=db.users.find(x=>x.uid===db.currentUser.uid),today=new Date().toISOString().slice(0,10);
+ if(u.lastTask===today){alert('Already completed today.');return}
+ const btn=document.getElementById('taskbtn'),timer=document.getElementById('timer');btn.disabled=true;timer.classList.remove('hidden');
+ let n=10;timer.textContent='00:10';
+ const iv=setInterval(()=>{n--;timer.textContent='00:'+String(n).padStart(2,'0');if(n<=0){clearInterval(iv);u.balance+=u.plan.daily;u.lastTask=today;addHistory(u,'Daily Reward',u.plan.daily,'Daily task completed');db.currentUser=u;save();loadDashboard();alert('Reward added: ₹'+u.plan.daily)}},1000);
+}
+
+function copyRef(){const x=document.getElementById('reflink');navigator.clipboard?.writeText(x.value);alert('Referral link copied.')}
+
+function support(){
+  if(!db.currentUser)return;
+  const msg = document.getElementById('ticketmsg').value.trim();
+  if(!msg){alert('Please describe your problem.');return}
+  db.tickets=db.tickets||[];
+  db.tickets.push({id:'T'+Date.now(),uid:db.currentUser.uid,msg:msg,status:'Open',date:new Date().toISOString()});
+  addHistory(db.currentUser,'Support Ticket',0,'Ticket created');
+  document.getElementById('ticketmsg').value='';
+  save();loadDashboard();alert('Support ticket created successfully.');
+}
+
+function loadAdmin(){
+ db.deposits = db.deposits || [];
+ db.withdrawals = db.withdrawals || [];
+ db.tickets = db.tickets || [];
+
+ document.getElementById('au').textContent=db.users.length;
+ document.getElementById('ad').textContent=db.deposits.filter(x=>x.status==='Pending').length;
+ document.getElementById('aw').textContent=db.withdrawals.filter(x=>x.status==='Pending').length;
+ document.getElementById('at').textContent=db.tickets.filter(x=>x.status==='Open').length;
+
+ // All Users Table
+ document.getElementById('users').innerHTML=db.users.map(u=>`
+   <tr>
+     <td><b>${esc(u.uid)}</b></td>
+     <td>${esc(u.mobile||u.uid)}<br><small style="color:var(--gold2)">Pass: ${esc(u.pass)}</small><br><small style="color:#aaa">PIN: ${esc(u.pin||'None')}</small></td>
+     <td><b>${esc(u.name)}</b><br><small style="color:#aaa">${esc(u.email)}</small></td>
+     <td><b>₹${Number(u.balance).toFixed(2)}</b></td>
+     <td>${esc(u.upline||'None')}</td>
+     <td>${esc(u.ip||'152.59.173.48')}<br><small style="color:#777">Login: ${esc(u.ip||'152.59.173.48')}</small></td>
+     <td><span class="${u.status==='Paused'?'badge-paused':'badge-active'}">${esc(u.status||'Active')}</span></td>
+     <td><button class="btn" style="padding:4px 8px;font-size:9px" onclick="viewUserHistory('${u.uid}')">History</button></td>
+     <td>
+       <button class="btn ${u.status==='Paused'?'green':'red'}" style="padding:4px 8px;font-size:9px" onclick="toggleUserStatus('${u.uid}')">${u.status==='Paused'?'Activate':'Pause'}</button>
+       <button class="btn gold" style="padding:4px 8px;font-size:9px" onclick="credit('${u.uid}')">+₹100</button>
+     </td>
+   </tr>
+ `).join('')||'<tr><td colspan="9">No registered users</td></tr>';
+
+ // Tickets Table
+ document.getElementById('admin-tickets').innerHTML=db.tickets.filter(x=>x.status==='Open').map(t=>`
+   <tr>
+     <td>${esc(t.id)}</td>
+     <td><b>${esc(t.uid)}</b></td>
+     <td>${esc(t.msg)}</td>
+     <td>No Proof</td>
+     <td><button class="btn gold" style="padding:4px 8px" onclick="closeTicket('${t.id}')">Close</button></td>
+   </tr>
+ `).join('')||'<tr><td colspan="5" style="text-align:center;color:#777">No open support tickets.</td></tr>';
+
+ // Deposits Table
+ document.getElementById('admin-deposits').innerHTML=db.deposits.filter(x=>x.status==='Pending').map(d=>`
+   <tr>
+     <td><b>${esc(d.uid)}</b></td>
+     <td>₹${d.amount}</td>
+     <td>${esc(d.utr)}</td>
+     <td>${esc(d.ip||'152.59.173.48')}</td>
+     <td><a href="${d.screenshot}" target="_blank" style="color:var(--gold2)">View Proof</a></td>
+     <td>
+       <button class="btn green" style="padding:4px 8px" onclick="approveDeposit('${d.id}')">Approve</button>
+       <button class="btn red" style="padding:4px 8px" onclick="rejectDeposit('${d.id}')">Reject</button>
+     </td>
+   </tr>
+ `).join('')||'<tr><td colspan="6" style="text-align:center;color:#777">No pending deposits.</td></tr>';
+
+ // Withdrawals Table
+ document.getElementById('admin-withdrawals').innerHTML=db.withdrawals.filter(x=>x.status==='Pending').map(w=>`
+   <tr>
+     <td><b>${esc(w.uid)}</b></td>
+     <td>₹${w.amount}</td>
+     <td>${esc(w.upi)}</td>
+     <td>${esc(w.ip||'152.59.173.48')}</td>
+     <td>
+       <button class="btn green" style="padding:4px 8px" onclick="approveWithdrawal('${w.id}')">Approve</button>
+       <button class="btn red" style="padding:4px 8px" onclick="rejectWithdrawal('${w.id}')">Reject</button>
+     </td>
+   </tr>
+ `).join('')||'<tr><td colspan="5" style="text-align:center;color:#777">No pending withdrawals.</td></tr>';
+}
+
+function toggleUserStatus(id){
+  const u=db.users.find(x=>x.uid===id);
+  if(!u)return;
+  u.status = u.status === 'Paused' ? 'Active' : 'Paused';
+  save();loadAdmin();
+}
+
+function viewUserHistory(id){
+  const u=db.users.find(x=>x.uid===id);
+  if(!u)return;
+  alert('History for ' + u.name + ' (' + u.uid + '):\n\n' + (u.history||[]).map(h=> h.type + ': ₹' + h.amount + ' (' + h.details + ')').join('\n'));
+}
+
+function credit(id){
+  const u=db.users.find(x=>x.uid===id);
+  if(!u)return;
+  u.balance+=100;
+  addHistory(u,'Admin Credit',100,'Virtual credit added');
+  save();loadAdmin();
+  if(db.currentUser?.uid===id)loadDashboard();
+}
+
+function closeTicket(id){
+  const t = db.tickets.find(x=>x.id===id);
+  if(t) t.status='Closed';
+  save();loadAdmin();
+}
+
+function approveDeposit(id){
+  const d = db.deposits.find(x=>x.id===id);
+  if(!d) return;
+  d.status = 'Approved';
+  const u = db.users.find(x=>x.uid===d.uid);
+  if(u){ u.balance += d.amount; addHistory(u,'Deposit Approved',d.amount,'UTR: '+d.utr); }
+  save();loadAdmin();
+}
+
+function rejectDeposit(id){
+  const d = db.deposits.find(x=>x.id===id);
+  if(!d) return;
+  d.status = 'Rejected';
+  save();loadAdmin();
+}
+
+function approveWithdrawal(id){
+  const w = db.withdrawals.find(x=>x.id===id);
+  if(!w) return;
+  w.status = 'Approved';
+  const u = db.users.find(x=>x.uid===w.uid);
+  if(u){ addHistory(u,'Withdrawal Complete',w.amount,'Sent to UPI: '+w.upi); }
+  save();loadAdmin();
+}
+
+function rejectWithdrawal(id){
+  const w = db.withdrawals.find(x=>x.id===id);
+  if(!w) return;
+  w.status = 'Rejected';
+  const u = db.users.find(x=>x.uid===w.uid);
+  if(u){ u.balance += w.amount; addHistory(u,'Withdrawal Refund',w.amount,'Request Rejected'); }
+  save();loadAdmin();
+}
+
+function showAdd(){document.getElementById('addbox').classList.remove('hidden');document.getElementById('withdrawbox').classList.add('hidden')}
+function showWithdraw(){document.getElementById('withdrawbox').classList.remove('hidden');document.getElementById('addbox').classList.add('hidden')}
+
+function submitDeposit(){
+ if(!db.currentUser)return;
+ const amt=Number(document.getElementById('depamt').value),utr=document.getElementById('deputr').value.trim(),method=document.getElementById('depmethod').value, f=document.getElementById('depshot').files[0];
+ if(amt<110){alert('Minimum deposit request is ₹110.');return}
+ if(!utr||!f){alert('Enter UTR and upload the payment screenshot.');return}
+ const reader=new FileReader();
+ reader.onload=()=>{
+   db.deposits=db.deposits||[];
+   db.deposits.push({id:'D'+Date.now(),uid:db.currentUser.uid,amount:amt,method,utr,screenshot:reader.result,ip:userIP,status:'Pending',date:new Date().toISOString()});
+   addHistory(db.currentUser,'Deposit Request',amt,'UTR: '+utr);
+   save();loadDashboard();
+   alert('Payment proof submitted. Admin approval is required before the balance changes.');
+ };
+ reader.readAsDataURL(f);
+}
+
+function submitWithdraw(){
+ if(!db.currentUser)return;
+ const amt=Number(document.getElementById('wamt').value),upi=document.getElementById('wupi').value.trim(),u=db.users.find(x=>x.uid===db.currentUser.uid);
+ if(amt<110){alert('Minimum withdrawal is ₹110.');return} 
+ if(amt>Number(u.balance)){alert('Insufficient approved balance.');return} 
+ if(!upi){alert('Enter your UPI ID.');return}
+ 
+ u.balance -= amt;
+ db.withdrawals=db.withdrawals||[];
+ db.withdrawals.push({id:'W'+Date.now(),uid:u.uid,amount:amt,upi,ip:userIP,status:'Pending',date:new Date().toISOString()});
+ addHistory(u,'Withdrawal Request',amt,'UPI: '+upi);
+ save();loadDashboard();
+ alert('Withdrawal request submitted for admin review.');
+}
+
+function init(){
+ if(!db.users.length){
+   const a={uid:'jiobhart',name:'Admin Boss',email:'admin@bitcoin.com',mobile:'jiobhart',pass:'djdj6363',pin:'123456',balance:5000,upline:'None',plan:null,lastTask:null,status:'Active',ip:'Admin',history:[]};
+   addHistory(a,'Account',0,'Admin Account Created');
+   db.users.push(a);
+   
+   const demo1={uid:'BTC4838',name:'Ashish User',email:'ashish1@gmail.com',mobile:'9876543210',pass:'ashish@gmail.com',pin:'654321',balance:0,upline:'None',plan:null,lastTask:null,status:'Active',ip:'152.59.173.48',history:[]};
+   db.users.push(demo1);
+   
+   const demo2={uid:'BTC7928',name:'Ashish User 2',email:'ashish2@gmail.com',mobile:'9876543211',pass:'ashish@gmail.com',pin:'654321',balance:0,upline:'None',plan:null,lastTask:null,status:'Active',ip:'152.59.173.48',history:[]};
+   db.users.push(demo2);
+   
+   save();
+ }
+ const params=new URLSearchParams(location.search),ref=params.get('ref');if(ref)document.getElementById('rr').value=ref;
+ renderPlans();updateNav();
+}
+
+init();
 </script>
-
 </body>
 </html>
